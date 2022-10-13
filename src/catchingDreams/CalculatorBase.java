@@ -19,7 +19,8 @@ public class CalculatorBase {
 			System.out.println("2 - Substraction");
 			System.out.println("3 - Multiplication");
 			System.out.println("4 - Division");
-			System.out.println("5- Quit the program");
+			System.out.println("5 - Remainder of dividing");
+			System.out.println("6- Quit the program");
 		
 			int operation = sc.nextInt();
 			switch (operation) {
@@ -33,9 +34,18 @@ public class CalculatorBase {
 					System.out.println(num1 * num2);
 					break;
 				case (4): 
+					if (num2 == 0) {
+						System.out.println("You can't divide by zero. Enter number 2 again!");
+					num2 = sc.nextDouble();
+					}
+					else {
 					System.out.println(num1 / num2);
+					}
 					break;
-				case (5):
+				case (5): {
+					System.out.println(num1 % num2);
+				}	
+				case (6):
 					System.out.println("We are closing this app... Bye!");
 					sc.close();
 					break outer;

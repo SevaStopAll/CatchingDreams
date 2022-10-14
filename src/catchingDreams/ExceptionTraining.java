@@ -5,11 +5,15 @@ import java.util.Scanner;
 
 public class ExceptionTraining {
 	public static void main(String [] args) {
-		Scanner sc = new Scanner(System.in);
-		HashMap<Integer, String> listToDo = new HashMap <Integer, String>();
-		int count = 1;
-		String toDo = sc.nextLine();
-		listToDo.put(count, toDo);
-		count++;
+		try{
+		    int[] numbers = new int[3];
+		    numbers[4]=45;
+		    System.out.println(numbers[4]);
+		}
+		catch(Exception ex){
+		     
+		    ex.printStackTrace();
+		}
+		System.out.println("Программа завершена");
 }
 }

@@ -12,16 +12,21 @@ public class CalculatorBase {
 		System.out.println("Please, enter number №2");
 		double num2 = sc.nextDouble();
 		System.out.println("Thank you! Now let's choose the operation!");
-		
-		outer :
+		calc(num1, num2);
+		sc.close();
+	}
+	
+	public static void calc(double num1, double num2) {
+	outer :
 			while (true) {
 			System.out.println("1 - Addition");
 			System.out.println("2 - Substraction");
 			System.out.println("3 - Multiplication");
 			System.out.println("4 - Division");
 			System.out.println("5 - Remainder of dividing");
-			System.out.println("6- Quit the program");
-		
+			System.out.println("6 - Exponentiation");
+			System.out.println("7 - Quit the program");
+			Scanner sc = new Scanner(System.in);
 			int operation = sc.nextInt();
 			switch (operation) {
 				case (1):
@@ -47,12 +52,17 @@ public class CalculatorBase {
 					break;
 				}	
 				case (6):
+					System.out.println(Math.pow(num1, num2));
+					break;
+				case (7):
 					System.out.println("We are closing this app... Bye!");
 					sc.close();
 					break outer;
 				default: 
 					System.out.println("Enter correct number!");
+					
 			}
 		}
-	}
+}
+	
 }

@@ -40,6 +40,8 @@ public class ToDoList {
 		case(5): 
 			sc.close();
 			break outer;
+		default: 
+			System.out.println("Enter correct number");
 		}
 	}
 }

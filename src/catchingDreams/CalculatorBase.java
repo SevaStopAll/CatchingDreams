@@ -44,6 +44,7 @@ public class CalculatorBase {
 					break;
 				case (5): {
 					System.out.println(num1 % num2);
+					break;
 				}	
 				case (6):
 					System.out.println("We are closing this app... Bye!");

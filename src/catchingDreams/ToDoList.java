@@ -8,6 +8,7 @@ public class ToDoList {
 	Scanner sc = new Scanner(System.in);
 	HashMap<Integer, String> listToDo = new HashMap <Integer, String>();
 	int count = 1;
+	String toDo = "";
 	outer:
 	 while (true) {
 		System.out.println("Hello! Bienvenue in my ToDoList project.");
@@ -22,7 +23,7 @@ public class ToDoList {
 		switch (command) {
 		case (1): 
 			System.out.println("Write what do you want to add.");
-			String toDo = sc.next();
+			toDo = sc.next();
 			listToDo.put(count, toDo);
 			count++;
 			break;

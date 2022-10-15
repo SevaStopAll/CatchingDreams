@@ -32,7 +32,7 @@ public class CalculatorBase {
 			int operation = sc.nextInt();
 			switch (operation) {
 				case (0):
-					System.out.println("This is a pet project, so you can enter 2 numbers by two enters. Hope I can improve it. Thank you");
+					System.out.println("This is a pre-pet project, so you can enter 2 numbers by two enters. Hope I can improve it. Thank you");
 				case (1):
 					System.out.println(num1 + num2);
 					break;

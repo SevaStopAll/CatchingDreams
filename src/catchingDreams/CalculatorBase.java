@@ -19,6 +19,7 @@ public class CalculatorBase {
 	public static void calc(double num1, double num2) {
 	outer :
 			while (true) {
+			System.out.println("0 - Watch the readme");	
 			System.out.println("1 - Addition");
 			System.out.println("2 - Substraction");
 			System.out.println("3 - Multiplication");
@@ -26,9 +27,12 @@ public class CalculatorBase {
 			System.out.println("5 - Remainder of dividing");
 			System.out.println("6 - Exponentiation");
 			System.out.println("7 - Quit the program");
+			System.out.println("9 - Choose another numbers");
 			Scanner sc = new Scanner(System.in);
 			int operation = sc.nextInt();
 			switch (operation) {
+				case (0):
+					System.out.println("This is a pet project, so you can enter 2 numbers by two enters. Hope I can improve it. Thank you");
 				case (1):
 					System.out.println(num1 + num2);
 					break;
@@ -38,15 +42,14 @@ public class CalculatorBase {
 				case (3):
 					System.out.println(num1 * num2);
 					break;
-				case (4): 
-					if (num2 == 0) {
-						System.out.println("You can't divide by zero. Enter number 2 again!");
-					num2 = sc.nextDouble();
-					}
-					else {
-					System.out.println(num1 / num2);
-					}
-					break;
+				case (4): 	
+					try {
+						if(num2 == 0) throw new ArithmeticException();
+					System.out.println(num1 / num2);	
+					break; 
+					} catch (ArithmeticException ex){
+						System.out.println("Don't divide by zero.");
+					}		
 				case (5): {
 					System.out.println(num1 % num2);
 					break;
@@ -58,6 +61,12 @@ public class CalculatorBase {
 					System.out.println("We are closing this app... Bye!");
 					sc.close();
 					break outer;
+				case (9):
+					System.out.println("Please, enter number №1");
+					num1 = sc.nextDouble();
+					System.out.println("Please, enter number №2");
+					num2 = sc.nextDouble();
+					calc(num1, num2);
 				default: 
 					System.out.println("Enter correct number!");
 					

@@ -1,9 +1,10 @@
 package catchingDreams;
 
+import java.io.*;
 import java.util.Scanner;
 
 public class CalculatorBase {
-	public static void main(String [] args) {
+	public static void main(String [] args) throws Exception {
 		System.out.println("Hello there!");
 		System.out.println("It is a simple calcutalor made just for testing some capacities");
 		Scanner sc = new Scanner(System.in);
@@ -14,10 +15,12 @@ public class CalculatorBase {
 		System.out.println("Thank you! Now let's choose the operation!");
 		calc(num1, num2);
 		sc.close();
+		
 	}
 	
-	public static void calc(double num1, double num2) {
-	outer :
+	public static void calc(double num1, double num2) throws Exception {
+		
+		outer :
 			while (true) {
 			System.out.println("0 - Watch the readme");	
 			System.out.println("1 - Addition");
@@ -30,32 +33,48 @@ public class CalculatorBase {
 			System.out.println("9 - Choose another numbers");
 			Scanner sc = new Scanner(System.in);
 			int operation = sc.nextInt();
+			FileWriter wr = new FileWriter("MyFile.txt", true);
+			
 			switch (operation) {
 				case (0):
-					System.out.println("This is a pre-pet project, so you can enter 2 numbers by two enters. Hope I can improve it. Thank you");
+					System.out.println("This is a pre-pre-pet project, so you can enter 2 numbers by two enters. Hope I can improve it. Thank you");
 				case (1):
 					System.out.println(num1 + num2);
+					wr.write(("Addition result " + (double)(num1 + num2) + '\n'));
+					wr.close();
 					break;
 				case (2):
 					System.out.println(num1 - num2);
+					wr.write(("Substraction result " + (double)(num1 - num2) + '\n'));
+					wr.close();
 					break;
 				case (3):
 					System.out.println(num1 * num2);
+					wr.write(("Multiplication result " + (double)(num1 * num2) + '\n'));
+					wr.close();
 					break;
 				case (4): 	
 					try {
 						if(num2 == 0) throw new ArithmeticException();
-					System.out.println(num1 / num2);	
+					System.out.println(num1 / num2);
+					wr.write(("Division result " + (double)(num1 / num2) + '\n'));
+					wr.close();
 					break; 
 					} catch (ArithmeticException ex){
 						System.out.println("Don't divide by zero.");
+						wr.write( ("Don't divide by zero. " + '\n'));
+						wr.close();
 					}		
 				case (5): {
 					System.out.println(num1 % num2);
+					wr.write(("Remainder of division result " + (double)(num1 % num2) + '\n'));
+					wr.close();
 					break;
 				}	
 				case (6):
 					System.out.println(Math.pow(num1, num2));
+					wr.write(("Exponentiation result " + (double)(Math.pow(num1, num2)) + '\n'));
+					wr.close();
 					break;
 				case (7):
 					System.out.println("We are closing this app... Bye!");

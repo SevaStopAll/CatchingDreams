@@ -121,3 +121,9 @@ Operation №6
 1.0 % 1.0 = 0.0
 Operation №7
 1.0 ^ 1.0 = 1.0
+Addition result 2.0
+Operation №1
+1.0 + 1.0 = 2.0
+Exponentiation result 3125.0
+Operation №1
+5.0 ^ 5.0 = 3125.0

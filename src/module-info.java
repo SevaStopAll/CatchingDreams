@@ -6,4 +6,5 @@
  *
  */
 module catchingDreams {
+	requires java.sql;
 }

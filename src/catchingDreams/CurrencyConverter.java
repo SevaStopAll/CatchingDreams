@@ -2,10 +2,11 @@ package catchingDreams;
 
 import java.util.Locale;
 import java.util.Scanner;
+
 import java.io.*;
 import java.text.NumberFormat;
 
-public class Currency_Converter_Demo {
+public class CurrencyConverter {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		double valueOf = sc.nextDouble();

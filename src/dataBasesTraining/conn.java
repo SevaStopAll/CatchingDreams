@@ -29,7 +29,7 @@ public class conn {
 	   {
 		   conn = null;
 		   Class.forName("org.sqlite.JDBC");
-		   conn = DriverManager.getConnection("jdbc:sqlite:TEST1.s3db");
+		   conn = DriverManager.getConnection("jdbc:sqlite:humans.db");
 		   
 		   System.out.println("База Подключена!");
 	   }
@@ -126,7 +126,7 @@ public class conn {
 		   statmt.execute("INSERT INTO 'users' ('name', 'phone') VALUES ('Petya', 125453); ");
 		   statmt.execute("INSERT INTO 'users' ('name', 'phone') VALUES ('Vasya', 321789); ");
 		   statmt.execute("INSERT INTO 'users' ('name', 'phone') VALUES ('Masha', 456123); ");
-		  
+		   				  
 		   System.out.println("Таблица заполнена");
 	}
 	
@@ -151,8 +151,10 @@ public class conn {
 	
 	// ------------ 5 пункт Прямой запрос в БД -----------
 		public static void WriteDBDirect () throws SQLException {
+			statmt = conn.createStatement();
 			String query = sc.nextLine();
-			statmt.execute('"' + query + '"');
+			statmt.execute(query);
+			System.out.println("OK");
 		}
 
 		// --------Закрытие--------

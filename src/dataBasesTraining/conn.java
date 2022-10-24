@@ -149,6 +149,12 @@ public class conn {
 		System.out.println("Таблица выведена");
 	    }
 	
+	// ------------ 5 пункт Прямой запрос в БД -----------
+		public static void WriteDBDirect () throws SQLException {
+			String query = sc.nextLine();
+			statmt.execute('"' + query + '"');
+		}
+
 		// --------Закрытие--------
 		public static void CloseDB() throws ClassNotFoundException, SQLException
 		   {

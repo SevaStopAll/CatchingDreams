@@ -13,7 +13,7 @@ public class conn {
 	public static Statement statmt;
 	public static ResultSet resSet;
 	public static Scanner sc = new Scanner(System.in);
-	public static String column1;
+	
 	public static String column2;
 	public static String column3;
 	public static String column4;
@@ -42,7 +42,7 @@ public class conn {
 		int columnsNum = sc.nextInt();
 		System.out.println("Set the columns' names");
 		if (columnsNum == 1) {
-			column1 = sc.next();   
+			String column1 = sc.next();   
 			sc.nextLine();														// Сделай в цикле!
 			System.out.println("Set the columns' types");
 			column1Type = sc.nextLine();
@@ -50,7 +50,7 @@ public class conn {
 			System.out.println("The table was created or already exists.");
 		}
 		else if (columnsNum == 2) {
-			 column1 = sc.next();
+			String column1 = sc.next();
 			 sc.nextLine();
 			 column2 = sc.next();
 			 sc.nextLine();
@@ -61,7 +61,7 @@ public class conn {
 				System.out.println("The table was created or already exists.");
 		}
 		else if (columnsNum == 3) {
-			column1 = sc.next();
+			String column1 = sc.next();
 			 sc.nextLine();
 			 column2 = sc.next();
 			 sc.nextLine();
@@ -76,7 +76,7 @@ public class conn {
 				System.out.println("The table was created or already exists.");
 		}
 		else if (columnsNum == 4) {
-			column1 = sc.next();
+			String column1 = sc.next();
 			sc.nextLine();
 			column2 = sc.next();
 			sc.nextLine();
@@ -94,7 +94,7 @@ public class conn {
 			System.out.println("The table was created or already exists.");
 		}
 		else if (columnsNum == 5) {
-			column1 = sc.next();
+			String column1 = sc.next();
 			sc.nextLine();
 			column2 = sc.next();
 			sc.nextLine();
@@ -123,7 +123,7 @@ public class conn {
 		statmt = conn.createStatement();
 		String query = sc.nextLine();
 		statmt.execute(query);
-		System.out.println("OK");
+		System.out.println("Done");
 	}
 	
 	// -------- Вывод таблицы--------
@@ -132,6 +132,7 @@ public class conn {
 		statmt = conn.createStatement();
 		System.out.println("What would you like to see?");
 		String query = sc.nextLine();
+		// Here we have to choose the name of columns and its types for do not write it manually. 
 		resSet = statmt.executeQuery(query);
 		
 		while(resSet.next())
@@ -143,7 +144,7 @@ public class conn {
 	         System.out.println();
 		}	
 		
-		System.out.println("Таблица выведена");
+		System.out.println("Table is displayed");
 	    }
 	
 
@@ -154,7 +155,7 @@ public class conn {
 			statmt.close();
 			resSet.close();
 			
-			System.out.println("Соединения закрыты");
+			System.out.println("Connections closed");
 		   }
 
 }

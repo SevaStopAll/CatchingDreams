@@ -14,26 +14,18 @@ public class conn {
 	public static ResultSet resSet;
 	public static Scanner sc = new Scanner(System.in);
 	
-	public static String column2;
-	public static String column3;
-	public static String column4;
-	public static String column5;
-	public static String column1Type;
-	public static String column2Type;
-	public static String column3Type;
-	public static String column4Type;
-	public static String column5Type;
-	
-	// --------ПОДКЛЮЧЕНИЕ К БАЗЕ ДАННЫХ--------
+	// --------Connection to the base--------
 	public static void Conn() throws ClassNotFoundException, SQLException 
 	   {
 		   conn = null;
 		   Class.forName("org.sqlite.JDBC");
-		   conn = DriverManager.getConnection("jdbc:sqlite:humans.db");
+		   System.out.println("Please, enter the name of new or existing DB!");
+		   String baseName = sc.nextLine();
+		   conn = DriverManager.getConnection("jdbc:sqlite:" + baseName);
 		   
-		   System.out.println("База Подключена!");
+		   System.out.println("The base was connected or created!");
 	   }
-	// --------Создание таблицы--------
+	// --------Creating table--------  (Try to loop it)
 	public static void CreateDB() throws ClassNotFoundException, SQLException {
 		statmt = conn.createStatement();
 		System.out.println("Please enter the table name");
@@ -43,52 +35,52 @@ public class conn {
 		System.out.println("Set the columns' names");
 		if (columnsNum == 1) {
 			String column1 = sc.next();   
-			sc.nextLine();														// Сделай в цикле!
+			sc.nextLine();														
 			System.out.println("Set the columns' types");
-			column1Type = sc.nextLine();
+			String column1Type = sc.nextLine();
 			statmt.execute("CREATE TABLE if not exists " + tableName + "('" + column1 + "'" + column1Type + ");");
 			System.out.println("The table was created or already exists.");
 		}
 		else if (columnsNum == 2) {
 			String column1 = sc.next();
-			 sc.nextLine();
-			 column2 = sc.next();
-			 sc.nextLine();
-			 System.out.println("Set the columns' types");
-			 column1Type = sc.nextLine();
-			 column2Type = sc.nextLine();
-			 statmt.execute("CREATE TABLE if not exists " + tableName + "('" + column1 + "'" + column1Type + ", '" + column2 + "'" + column2Type + ");");
-				System.out.println("The table was created or already exists.");
+			sc.nextLine();
+			String column2 = sc.next();
+			sc.nextLine();
+			System.out.println("Set the columns' types");
+			String column1Type = sc.nextLine();
+			String column2Type = sc.nextLine();
+			statmt.execute("CREATE TABLE if not exists " + tableName + "('" + column1 + "'" + column1Type + ", '" + column2 + "'" + column2Type + ");");
+			System.out.println("The table was created or already exists.");
 		}
 		else if (columnsNum == 3) {
 			String column1 = sc.next();
-			 sc.nextLine();
-			 column2 = sc.next();
-			 sc.nextLine();
-			 column3 = sc.next();
-			 sc.nextLine();
-			 System.out.println("Set the columns' types");
-			 column1Type = sc.nextLine();
-			 column2Type = sc.nextLine();
-			 column3Type = sc.nextLine();
-			 statmt.execute("CREATE TABLE if not exists " + tableName + "('" + column1 + "'" + column1Type + ", '" + column2 + "'" + column2Type + ", '" + column3 + "'" + column3Type + ");");
+			sc.nextLine();
+			String column2 = sc.next();
+			sc.nextLine();
+			String column3 = sc.next();
+			sc.nextLine();
+			System.out.println("Set the columns' types");
+			String column1Type = sc.nextLine();
+			String column2Type = sc.nextLine();
+			String column3Type = sc.nextLine();
+			statmt.execute("CREATE TABLE if not exists " + tableName + "('" + column1 + "'" + column1Type + ", '" + column2 + "'" + column2Type + ", '" + column3 + "'" + column3Type + ");");
 				
-				System.out.println("The table was created or already exists.");
+			System.out.println("The table was created or already exists.");
 		}
 		else if (columnsNum == 4) {
 			String column1 = sc.next();
 			sc.nextLine();
-			column2 = sc.next();
+			String column2 = sc.next();
 			sc.nextLine();
-			column3 = sc.next();
+			String column3 = sc.next();
 			sc.nextLine();
-			column4 = sc.next();
+			String column4 = sc.next();
 			sc.nextLine();
 			System.out.println("Set the columns' types");
-			column1Type = sc.nextLine();
-			column2Type = sc.nextLine();
-			column3Type = sc.nextLine();
-			column4Type = sc.nextLine();
+			String column1Type = sc.nextLine();
+			String column2Type = sc.nextLine();
+			String column3Type = sc.nextLine();
+			String column4Type = sc.nextLine();
 			statmt.execute("CREATE TABLE if not exists " + tableName + "('" + column1 + "'" + column1Type + ", '" + column2 + "'" + column2Type + ", '" + column3 + "'" + column3Type + ", '" + column4 + "'" + column4Type + ");");
 				
 			System.out.println("The table was created or already exists.");
@@ -96,28 +88,28 @@ public class conn {
 		else if (columnsNum == 5) {
 			String column1 = sc.next();
 			sc.nextLine();
-			column2 = sc.next();
+			String column2 = sc.next();
 			sc.nextLine();
-			column3 = sc.next();
+			String column3 = sc.next();
 			sc.nextLine();
-			column4 = sc.next();
+			String column4 = sc.next();
 			sc.nextLine();
-			column5 = sc.next();
+			String column5 = sc.next();
 			sc.nextLine();
-			 System.out.println("Set the columns' types");
-			 column1Type = sc.nextLine();
-			 column2Type = sc.nextLine();
-			 column3Type = sc.nextLine();
-			 column4Type = sc.nextLine();
-			 column5Type = sc.nextLine();
-			 statmt.execute("CREATE TABLE if not exists " + tableName + "('" + column1 + "'" + column1Type + ", '" + column2 + "'" + column2Type + ", '" + column3 + "'" + column3Type + ", '" 
-			 + column4 + "'" + column4Type + ", '" + column5 + "'" + column5Type +");");
+			System.out.println("Set the columns' types");
+			String column1Type = sc.nextLine();
+			String column2Type = sc.nextLine();
+			String column3Type = sc.nextLine();
+			String column4Type = sc.nextLine();
+			String column5Type = sc.nextLine();
+			statmt.execute("CREATE TABLE if not exists " + tableName + "('" + column1 + "'" + column1Type + ", '" + column2 + "'" + column2Type + ", '" + column3 + "'" + column3Type + ", '" 
+			+ column4 + "'" + column4Type + ", '" + column5 + "'" + column5Type +");");
 				
-				System.out.println("The table was created or already exists.");
+			System.out.println("The table was created or already exists.");
 		}
 	   }
 		
-	// --------Заполнение таблицы--------
+	// --------Making a query--------
 	public static void WriteDB() throws SQLException
 	{
 		statmt = conn.createStatement();
@@ -126,7 +118,7 @@ public class conn {
 		System.out.println("Done");
 	}
 	
-	// -------- Вывод таблицы--------
+	// -------- Printing data--------
 	public static void ReadDB() throws ClassNotFoundException, SQLException
 	   {
 		statmt = conn.createStatement();
@@ -139,16 +131,16 @@ public class conn {
 		{
 			int id = resSet.getInt("id");
 			String  name = resSet.getString("name");
-	         System.out.println( "ID = " + id );
-	         System.out.println( "name = " + name );
-	         System.out.println();
+	        System.out.println( "ID = " + id );
+	        System.out.println( "name = " + name );
+	        System.out.println();
 		}	
 		
 		System.out.println("Table is displayed");
 	    }
 	
 
-		// --------Закрытие--------
+		// --------Closing--------
 		public static void CloseDB() throws ClassNotFoundException, SQLException
 		   {
 			conn.close();

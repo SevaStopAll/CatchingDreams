@@ -10,7 +10,7 @@ public class db {
 		outer:
 		while (true) {
 			System.out.println("Here is the menu for DB management! Please choose option");
-			System.out.println("1. Open DB or create new one. 2.Create new table if not exists. 3. Make an Insert query. 4. Show the data. 5. Do manual query. 6. Close programm");
+			System.out.println("1. Open DB or create new one. 2.Create new table if not exists. 3. Make an Insert query. 4. Show the data.  5. Close programm");
 			int operation = sc.nextInt();
 			switch (operation){
 				case (1):
@@ -25,10 +25,7 @@ public class db {
 				case (4):
 					conn.ReadDB();
 					break;
-				case (5):
-					conn.WriteDBDirect(); //
-					break;
-				case (0): 
+				case (5): 
 					sc.close();
 					break outer;
 					

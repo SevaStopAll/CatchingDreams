@@ -46,7 +46,6 @@ public class conn {
 			sc.nextLine();														// Сделай в цикле!
 			System.out.println("Set the columns' types");
 			column1Type = sc.nextLine();
-			System.out.println(column1Type);
 			statmt.execute("CREATE TABLE if not exists " + tableName + "('" + column1 + "'" + column1Type + ");");
 			System.out.println("The table was created or already exists.");
 		}
@@ -118,44 +117,35 @@ public class conn {
 		}
 	   }
 		
-		
-		
 	// --------Заполнение таблицы--------
 	public static void WriteDB() throws SQLException
 	{
-		   statmt.execute("INSERT INTO 'users' ('name', 'phone') VALUES ('Petya', 125453); ");
-		   statmt.execute("INSERT INTO 'users' ('name', 'phone') VALUES ('Vasya', 321789); ");
-		   statmt.execute("INSERT INTO 'users' ('name', 'phone') VALUES ('Masha', 456123); ");
-		   				  
-		   System.out.println("Таблица заполнена");
+		statmt = conn.createStatement();
+		String query = sc.nextLine();
+		statmt.execute(query);
+		System.out.println("OK");
 	}
 	
 	// -------- Вывод таблицы--------
 	public static void ReadDB() throws ClassNotFoundException, SQLException
 	   {
-		resSet = statmt.executeQuery("SELECT * FROM users");
+		statmt = conn.createStatement();
+		System.out.println("What would you like to see?");
+		String query = sc.nextLine();
+		resSet = statmt.executeQuery(query);
 		
 		while(resSet.next())
 		{
 			int id = resSet.getInt("id");
 			String  name = resSet.getString("name");
-			String  phone = resSet.getString("phone");
 	         System.out.println( "ID = " + id );
 	         System.out.println( "name = " + name );
-	         System.out.println( "phone = " + phone );
 	         System.out.println();
 		}	
 		
 		System.out.println("Таблица выведена");
 	    }
 	
-	// ------------ 5 пункт Прямой запрос в БД -----------
-		public static void WriteDBDirect () throws SQLException {
-			statmt = conn.createStatement();
-			String query = sc.nextLine();
-			statmt.execute(query);
-			System.out.println("OK");
-		}
 
 		// --------Закрытие--------
 		public static void CloseDB() throws ClassNotFoundException, SQLException

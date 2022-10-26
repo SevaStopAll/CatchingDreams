@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.io.*;
 
-public class ToDoList {
+public class ToDoList_txtFile {
 	public static void main(String[] args) throws Exception {
 		Scanner sc = new Scanner(System.in);
 		HashMap<Integer, String> listToDo = new HashMap<Integer, String>();

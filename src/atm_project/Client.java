@@ -4,7 +4,7 @@ package atm_project;
 
 public class Client {
 	static int clientId;
-	String name;
+	static String name;
 	public static int counter = 1; 
 	
 	public Client(String name) {
@@ -15,6 +15,10 @@ public class Client {
 	
 	public static int get_id() {
 		return clientId;
+	}
+	
+	public static String getName() {
+		return name;
 	}
 	
 

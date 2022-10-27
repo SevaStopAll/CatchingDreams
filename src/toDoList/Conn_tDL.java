@@ -23,28 +23,35 @@ public class Conn_tDL {
 	public static void WriteDB() throws SQLException {
 		statmt = conn.createStatement();
 		String query = sc.nextLine();
-		statmt.execute("INSERT into 'ToDoList' ('name') VALUES ('" + query + "');");
+		statmt.execute("INSERT into 'ToDoList' ('name', 'IsDone') VALUES ('" + query + "', 0);");
 		System.out.println("Done");
 	}
 	
-	public static void Delete() throws SQLException {
+	public static void MakeItDone() throws SQLException {
 		statmt = conn.createStatement();
-		int toDelete = sc.nextInt();
-		statmt.execute("DELETE FROM ToDoList WHERE ID =" + toDelete + ";");
+		int done = sc.nextInt();
+		statmt.execute("UPDATE ToDoList SET IsDone = 1 WHERE ID =" + done + ";");
 	}
 
 	public static void ReadDB() throws ClassNotFoundException, SQLException{
 		statmt = conn.createStatement();
 		resSet = statmt.executeQuery("SELECT * from ToDoList");
-		
+		int toDoQueue = 1;
 		while (resSet.next()) {
 			int id = resSet.getInt("ID");
 			String name = resSet.getString("Name");
-			System.out.println( "Taask №  " + id );
+			boolean isDone = resSet.getBoolean("IsDone");
+			System.out.println( "Task №  " + toDoQueue);
+			toDoQueue++;
 	        System.out.println( "What to do? -  " + name );
+	        System.out.println("Is it done? " + isDone);
+	        System.out.println("General number of this task:" + id);
 	        System.out.println();
-		}
-			
-		
+		}	
+	}
+	public static void Drop() throws SQLException {
+		statmt = conn.createStatement();
+		statmt.execute("DROP TABLE ToDoList;");
+		statmt.execute("CREATE TABLE ToDoList (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME text, isDone boolean);");
 	}
 }

@@ -14,6 +14,7 @@ public class ToDoList {
 			System.out.println("3: Watch the list");
 			System.out.println("4: Watch the readme");
 			System.out.println("5: Exit the programm");
+			System.out.println("6: Clean the table");
 			int command = sc.nextInt();
 
 			switch (command) {
@@ -22,8 +23,8 @@ public class ToDoList {
 				Conn_tDL.WriteDB();
 				break;
 			case (2):
-				System.out.println("Enter the number of thing you want to delete.");
-				Conn_tDL.Delete();
+				System.out.println("Enter the number of thing you want to make done.");
+				Conn_tDL.MakeItDone();
 				break;
 			case (3):
 				Conn_tDL.ReadDB();
@@ -31,6 +32,9 @@ public class ToDoList {
 			case (5):
 				sc.close();
 				break outer;
+			case (6):
+				Conn_tDL.Drop();
+				break;
 			default:
 				System.out.println("Enter correct number");
 			}

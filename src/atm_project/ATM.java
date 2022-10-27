@@ -1,20 +1,35 @@
 package atm_project;
 
+import java.util.Scanner;
+
+
 public class ATM {
 	public static void main(String [] args) {
-		Client Olga = new Client("Olga");
-		System.out.println(Olga.get_id());
-		Account a1 = new Account(300.00, Olga);
-		System.out.println(a1.getAccId());
-		Client Dima = new Client("Dima");
-		System.out.println(Dima.get_id());		
-		Account a2 = new Account(300.00, Dima);
-		System.out.println(a2.getAccId());
-		Client Sasha = new Client("Sasha");
-		System.out.println(Sasha.get_id());
-		Account a3 = new Account(300.00, Sasha);
-		System.out.println(a3.getAccId());
-		System.out.println(a1.getAccId());
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Welcome to ATM. Please select option.");
+		System.out.println("1.Log in. 2. Register new member (only for employers). 3. Exit.");
+		int operationNumber = sc.nextInt();
+		String managerPassword = "Qwerty";
+		switch(operationNumber) {
 		
+		case(1):
+			System.out.println("Please add your name and password!");
+			
+		case(2):
+			int counterPassword = 0;
+			while (counterPassword <= 2) {
+			System.out.println("Please enter your manager's password");
+			String enterManagerPass = sc.next();
+			if (enterManagerPass.equals(managerPassword)) {
+				counterPassword = 0;
+				System.out.println("Ok. There will be manager's terminal");
+			}
+			counterPassword++;	
+			}
+			
+		case(3):
+			sc.close();
+			System.exit(0);
+		}
 	}
 }

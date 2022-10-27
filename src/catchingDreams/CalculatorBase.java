@@ -57,6 +57,8 @@ public class CalculatorBase {
 				wr.write("Operation №" + operationNumber + '\n');
 				wr.write(((double) num1 + " + " + (double) num2 + " = " + (double) (num1 + num2) + '\n'));
 				wr.close();
+				System.out.println("Press 'F' and Enter to quit to menu");
+				sc.next();
 				break;
 			case (2):
 				System.out.println(num1 - num2);
@@ -66,6 +68,8 @@ public class CalculatorBase {
 				wr.write("Operation №" + operationNumber + '\n');
 				wr.write(((double) num1 + " - " + (double) num2 + " = " + (double) (num1 - num2) + '\n'));
 				wr.close();
+				System.out.println("Press 'F' and Enter to quit to menu");
+				sc.next();
 				break;
 			case (3):
 				System.out.println(num1 * num2);
@@ -75,6 +79,8 @@ public class CalculatorBase {
 				wr.write("Operation №" + operationNumber + '\n');
 				wr.write(((double) num1 + " * " + (double) num2 + " = " + (double) (num1 * num2) + '\n'));
 				wr.close();
+				System.out.println("Press 'F' and Enter to quit to menu");
+				sc.next();
 				break;
 			case (4):
 				try {
@@ -87,6 +93,8 @@ public class CalculatorBase {
 					wr.write("Operation №" + operationNumber + '\n');
 					wr.write(((double) num1 + " / " + (double) num2 + " = " + (double) (num1 / num2) + '\n'));
 					wr.close();
+					System.out.println("Press 'F' and Enter to quit to menu");
+					sc.next();
 					break;
 				} catch (ArithmeticException ex) {
 					System.out.println("Don't divide by zero.");
@@ -101,6 +109,8 @@ public class CalculatorBase {
 				wr.write("Operation №" + operationNumber + '\n');
 				wr.write(((double) num1 + " % " + (double) num2 + " = " + (double) (num1 % num2) + '\n'));
 				wr.close();
+				System.out.println("Press 'F' and Enter to quit to menu");
+				sc.next();
 				break;
 			}
 			case (6):
@@ -111,6 +121,8 @@ public class CalculatorBase {
 				wr.write("Operation №" + operationNumber + '\n');
 				wr.write(((double) num1 + " ^ " + (double) num2 + " = " + +(double) (Math.pow(num1, num2)) + '\n'));
 				wr.close();
+				System.out.println("Press 'F' and Enter to quit to menu");
+				sc.next();
 				break;
 			case (7):
 				System.out.println("Total operations number " + operationNumber);

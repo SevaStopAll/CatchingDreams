@@ -30,18 +30,24 @@ public class ToDoList_txtFile {
 				wr.write(toDo + '\n');
 				wr.close();
 				count++;
+				System.out.println("Press 'F' and Enter to quit to menu");
+				sc.next();
 				break;
 
 			case (2):
 				System.out.println("Enter the number of thing you want to delete.");
 				int toDelete = sc.nextInt();
 				listToDo.remove(toDelete);
+				System.out.println("Press 'F' and Enter to quit to menu");
+				sc.next();
 				break;
 			case (3):
 				for (HashMap.Entry<Integer, String> item : listToDo.entrySet()) {
 
 					System.out.printf("Priority: %d  To Do: %s \n", item.getKey(), item.getValue());
 				}
+			System.out.println("Press 'F' and Enter to quit to menu");
+			sc.next();
 				break;
 			case (5):
 				sc.close();

@@ -36,12 +36,18 @@ public class CurrencyConverter {
 			switch (currency) {
 			case (1):
 				finSumm = NumberFormat.getCurrencyInstance(Locale.US).format(summ / 10);
+			System.out.println("Press 'F' and Enter to quit to menu");
+			sc.next();
 				break;
 			case (2):
 				finSumm = NumberFormat.getCurrencyInstance(Locale.FRANCE).format(summ / 20);
+			System.out.println("Press 'F' and Enter to quit to menu");
+			sc.next();
 				break;
 			case (3):
 				finSumm = NumberFormat.getCurrencyInstance(Locale.CHINA).format(summ / 8);
+			System.out.println("Press 'F' and Enter to quit to menu");
+			sc.next();
 				break;
 			}
 			return finSumm;

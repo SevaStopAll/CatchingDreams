@@ -21,19 +21,27 @@ public class ToDoList {
 			case (1):
 				System.out.println("Write what do you want to add.");
 				Conn_tDL.WriteDB();
+				System.out.println("Press 'F' and Enter to quit to menu");
+				sc.next();
 				break;
 			case (2):
 				System.out.println("Enter the number of thing you want to make done.");
 				Conn_tDL.MakeItDone();
+				System.out.println("Press 'F' and Enter to quit to menu");
+				sc.next();
 				break;
 			case (3):
 				Conn_tDL.ReadDB();
+				System.out.println("Press 'F' and Enter to quit to menu");
+				sc.next();
 				break;
 			case (5):
 				sc.close();
 				break outer;
 			case (6):
 				Conn_tDL.Drop();
+				System.out.println("Press 'F' and Enter to quit to menu");
+				sc.next();
 				break;
 			default:
 				System.out.println("Enter correct number");

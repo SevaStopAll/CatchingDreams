@@ -151,3 +151,6 @@ Operation №5
 1.0 % 1.0 = 0.0
 Operation №6
 1.0 ^ 1.0 = 1.0
+Substraction result 0.0
+Operation №1
+1.0 - 1.0 = 0.0

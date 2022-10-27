@@ -18,12 +18,18 @@ public class db {
 					break;
 				case (2):
 					conn.CreateDB();
+				System.out.println("Press 'F' and Enter to quit to menu");
+				sc.next();
 					break;
 				case (3):
 					conn.WriteDB();
+				System.out.println("Press 'F' and Enter to quit to menu");
+				sc.next();
 					break;
 				case (4):
 					conn.ReadDB();
+				System.out.println("Press 'F' and Enter to quit to menu");
+				sc.next();
 					break;
 				case (5): 
 					sc.close();

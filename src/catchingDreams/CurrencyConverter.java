@@ -2,7 +2,6 @@ package catchingDreams;
 
 import java.util.Locale;
 import java.util.Scanner;
-
 import java.io.*;
 import java.text.NumberFormat;
 
@@ -53,5 +52,4 @@ public class CurrencyConverter {
 			return finSumm;
 		}
 	}
-
 }

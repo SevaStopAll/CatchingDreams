@@ -1,10 +1,16 @@
 package atm_project;
 
+
+import java.util.Scanner;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
 
-
 public class ATM {
-	public static void main(String [] args) {
+	public static void main(String [] args) throws ClassNotFoundException, SQLException{
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Welcome to ATM. Please select option.");
 		System.out.println("1.Log in. 2. Register new member (only for employers). 3. Exit.");
@@ -14,6 +20,9 @@ public class ATM {
 		
 		case(1):
 			System.out.println("Please add your name and password!");
+			String login = sc.next();
+			String password = sc.next();
+			// if (login.equals and password.equals )
 			
 		case(2):
 			int counterPassword = 0;
@@ -22,7 +31,8 @@ public class ATM {
 			String enterManagerPass = sc.next();
 			if (enterManagerPass.equals(managerPassword)) {
 				counterPassword = 0;
-				System.out.println("Ok. There will be manager's terminal");
+				Terminal.Conn();
+				break;
 			}
 			counterPassword++;	
 			}
@@ -32,4 +42,5 @@ public class ATM {
 			System.exit(0);
 		}
 	}
+	
 }

@@ -12,6 +12,8 @@ import java.util.Scanner;
 public class ATM {
 	public static void main(String [] args) throws ClassNotFoundException, SQLException{
 		Scanner sc = new Scanner(System.in);
+		Terminal.Conn();
+		Terminal.CreateUserList();
 		System.out.println("Welcome to ATM. Please select option.");
 		System.out.println("1.Log in. 2. Register new member (only for employers). 3. Exit.");
 		int operationNumber = sc.nextInt();
@@ -22,7 +24,13 @@ public class ATM {
 			System.out.println("Please add your name and password!");
 			String login = sc.next();
 			String password = sc.next();
-			// if (login.equals and password.equals )
+			if (password.equals(Terminal.CreateUserList().get(login))) {
+				System.out.println("Success");
+			}
+			else {
+			System.out.println("Not correct");
+			}
+			// if (password.equals(userslist.get(login))
 			
 		case(2):
 			int counterPassword = 0;
@@ -32,6 +40,7 @@ public class ATM {
 			if (enterManagerPass.equals(managerPassword)) {
 				counterPassword = 0;
 				Terminal.Conn();
+				Terminal.AddUser();
 				break;
 			}
 			counterPassword++;	

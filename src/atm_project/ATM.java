@@ -3,15 +3,16 @@ package atm_project;
 
 //
 import java.util.Scanner;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Scanner;
+
 
 public class ATM {
 	public static void main(String [] args) throws ClassNotFoundException, SQLException{
+		menu();
+	}
+
+	
+	public static void menu() throws ClassNotFoundException, SQLException{
 		Scanner sc = new Scanner(System.in);
 		Terminal.Conn();
 		Terminal.CreateUserList();
@@ -26,30 +27,12 @@ public class ATM {
 			String login = sc.next();
 			String password = sc.next();
 			if (password.equals(Terminal.CreateUserList().get(login))) {
-				Client c1 = new Client(login);
-				Account a1 = new Account(c1); // Add money on account
-				System.out.println("Hello, " + login);
-				System.out.println("What are you going to do?");
-				System.out.println("1. Get money. 2. Add money. 3.Send money. 4.Watch my balance.");
-				int operation = sc.nextInt();
-				switch (operation) {
-				case(1):
-					Terminal.GetMoney(login);
-					break;
-				case(2):
-					Terminal.AddMoney(login);
-					break;
-				case(3):
-					Terminal.SendMoney(login);
-					break;
-				case(4):
-					System.out.println(Terminal.ShowMyBalance(login));
-					break;
-				}
+				UserMenu(login);
 			}
 			else {
 			System.out.println("Not correct");
 			}
+			UserMenu(login);
 			
 		case(2):
 			int counterPassword = 0;
@@ -58,12 +41,14 @@ public class ATM {
 			String enterManagerPass = sc.next();
 			if (enterManagerPass.equals(managerPassword)) {
 				counterPassword = 0;
+				System.out.println("Manager, you can add new User. Please add its logIn and password");
 				Terminal.Conn();
 				Terminal.AddUser();
 				break;
 			}
 			counterPassword++;	
 			}
+			menu();
 		
 		case(3):
 			int counterPassword1 = 0;
@@ -78,11 +63,38 @@ public class ATM {
 				}
 				counterPassword1++;	
 				}
-		
+			menu();
+			
 		case(4):
 			sc.close();
 			System.exit(0);
 		}
 	}
+
+	
+	public static void UserMenu(String login) throws ClassNotFoundException, SQLException {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Hello, " + login);
+		System.out.println("What are you going to do?");
+		System.out.println("1. Get money. 2. Add money. 3.Send money. 4.Watch my balance. 5.Log off. ");
+		int operation = sc.nextInt();
+		switch (operation) {
+		case(1):
+			Terminal.GetMoney(login);
+			break;
+		case(2):
+			Terminal.AddMoney(login);
+			break;
+		case(3):
+			Terminal.SendMoney(login);
+			break;
+		case(4):
+			System.out.println(Terminal.ShowMyBalance(login));
+			break;
+		case(5):
+			menu();
+		}
+	}
 }
+
 

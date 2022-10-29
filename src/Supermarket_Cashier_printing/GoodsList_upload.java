@@ -20,9 +20,7 @@ public class GoodsList_upload {
 	public static Stack<String> Bill1 = new Stack<>();
 	public static Stack<Integer> BillPrice = new Stack<>();
 	public static int totalSumm = 0;
-	
-	
-	
+		
 	public static void uploadGoods() throws ClassNotFoundException, SQLException {
 		Conn();
 		CreateGoodsList();
@@ -72,4 +70,11 @@ public class GoodsList_upload {
 		System.out.println("Total: " + totalSumm + " ₽");
 	}
 	
+	public static void UpdateGoodsList() throws SQLException {
+		statmt = conn.createStatement();
+		String name = sc.nextLine();
+		int price = sc.nextInt();
+		statmt.execute("INSERT INTO 'Goodlist' (SKU_name, price) VALUES ('" + name + "', '" + price +"' );");
+		System.out.println("New SKU was added.");
+	}	
 }

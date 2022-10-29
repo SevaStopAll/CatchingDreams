@@ -22,6 +22,8 @@ public class Printing {
 			sc.close();
 			System.exit(0);
 		case(3):
+			GoodsList_upload.UpdateGoodsList();
+		case(4):
 			sc.close();
 			System.exit(0);
 		}

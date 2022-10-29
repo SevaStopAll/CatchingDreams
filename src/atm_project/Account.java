@@ -5,7 +5,7 @@ public class Account {
 	double summ;
 	boolean isBlocked = false;
 	
-	public Account(double summ, Client client) {
+	public Account(Client client) {
 		this.summ = summ;
 		account_ID = Client.get_id();
 	}

@@ -16,12 +16,14 @@ public class Terminal {
 	public static HashMap <String, String> usersList = new HashMap<>();
 
 
+	
 public static void Conn() throws ClassNotFoundException, SQLException {
 	conn = null;
 	Class.forName("org.sqlite.JDBC");
 	conn = DriverManager.getConnection("jdbc:sqlite:ATM_DB.db");
 	System.out.println("DB connected.");
 }
+
 
 public static void AddUser() throws SQLException {
 	statmt = conn.createStatement();
@@ -30,6 +32,7 @@ public static void AddUser() throws SQLException {
 	statmt.execute("INSERT INTO 'users' (userName, userPassword) VALUES ('" + logIn + "' , '" + password + "' );");
 	System.out.println("User account created.");
 }
+
 
 public static HashMap<String, String> CreateUserList() throws ClassNotFoundException, SQLException {
 	statmt = conn.createStatement();
@@ -40,9 +43,7 @@ public static HashMap<String, String> CreateUserList() throws ClassNotFoundExcep
 		usersList.put(logIn, password);
 	}
 	return usersList;
-	
-
-	}
+}
 
 
 public static void WatchUserList() throws ClassNotFoundException, SQLException {
@@ -62,6 +63,7 @@ public static void WatchUserList() throws ClassNotFoundException, SQLException {
 	resSet.close();
 }
 
+
 public static double ShowMyBalance(String logIn) throws ClassNotFoundException, SQLException {
 	statmt = conn.createStatement();
 	resSet = statmt.executeQuery("Select Account from 'users' WHERE UserName = '" + logIn + "'");
@@ -72,7 +74,7 @@ public static double ShowMyBalance(String logIn) throws ClassNotFoundException, 
 	return account;	
 }
 
-// HERE WE HAVE TO CHANGE THIS METHOD
+
 public static void GetMoney(String logIn) throws ClassNotFoundException, SQLException {
 	statmt = conn.createStatement();
 	statmt.executeQuery("Select Account from 'users' WHERE UserName = '" + logIn + "'");
@@ -87,5 +89,43 @@ public static void GetMoney(String logIn) throws ClassNotFoundException, SQLExce
 	statmt.close();
 	resSet.close();	
 }
+
+
+public static void AddMoney(String logIn) throws ClassNotFoundException, SQLException {
+	statmt = conn.createStatement();
+	statmt.executeQuery("Select Account from 'users' WHERE UserName = '" + logIn + "'");
+	System.out.println("Add your summ!");
+	int summ = sc.nextInt();
+	resSet = statmt.executeQuery("Select Account from 'users' WHERE UserName = '" + logIn + "'");
+	int accountBefore = resSet.getInt("Account");
+	int accountAfter = accountBefore + summ;
+	statmt.executeUpdate("UPDATE users SET Account = " + accountAfter + " WHERE UserName = '" + logIn + "';");
+	System.out.println("Done");
+	conn.close();
+	statmt.close();
+	resSet.close();
+}
+
+public static void SendMoney(String logIn) throws SQLException {
+	statmt = conn.createStatement();
+	statmt.executeQuery("Select Account from 'users' WHERE UserName = '" + logIn + "'");
+	System.out.println("What somm would you like to get?");
+	int summ = sc.nextInt();
+	System.out.println("Who would you like to send money?");
+	String reciever = sc.next();
+	resSet = statmt.executeQuery("Select Account from 'users' WHERE UserName = '" + logIn + "'");
+	int accountBefore = resSet.getInt("Account");
+	int accountAfter = accountBefore - summ;
+	statmt.executeUpdate("UPDATE users SET Account = " + accountAfter + " WHERE UserName = '" + logIn + "';");
+	resSet = statmt.executeQuery("Select Account from 'users' WHERE UserName = '" + reciever + "'");
+	int accountBeforeReciever = resSet.getInt("Account");
+	int accountAfterReciever = accountBeforeReciever + summ;
+	statmt.executeUpdate("UPDATE users SET Account = " + accountAfterReciever + " WHERE UserName = '" + reciever + "';");
+	System.out.println("Done");
+	conn.close();
+	statmt.close();
+	resSet.close();
+}
+
 }
 

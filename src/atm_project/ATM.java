@@ -30,15 +30,19 @@ public class ATM {
 				Account a1 = new Account(c1); // Add money on account
 				System.out.println("Hello, " + login);
 				System.out.println("What are you going to do?");
-				System.out.println("1. Get money. 2. Add money. 3.Watch my balance.");
+				System.out.println("1. Get money. 2. Add money. 3.Send money. 4.Watch my balance.");
 				int operation = sc.nextInt();
 				switch (operation) {
 				case(1):
 					Terminal.GetMoney(login);
 					break;
 				case(2):
-					
+					Terminal.AddMoney(login);
+					break;
 				case(3):
+					Terminal.SendMoney(login);
+					break;
+				case(4):
 					System.out.println(Terminal.ShowMyBalance(login));
 					break;
 				}

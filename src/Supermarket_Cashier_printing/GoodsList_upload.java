@@ -5,9 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -18,15 +17,15 @@ public class GoodsList_upload {
 	public static ResultSet resSet;
 	public static Scanner sc = new Scanner(System.in);
 	public static HashMap <String, Integer> goodsList = new HashMap<>();
-	public static Stack <String> Bill1 = new Stack<>();
+	public static Stack<String> Bill1 = new Stack<>();
 	public static Stack<Integer> BillPrice = new Stack<>();
-	public int finPrice = 0;
+	public static int totalSumm = 0;
+	
 	
 	
 	public static void uploadGoods() throws ClassNotFoundException, SQLException {
 		Conn();
 		CreateGoodsList();
-		// Here we have to realise a menu. 
 	}
 	
 	public static void Conn() throws ClassNotFoundException, SQLException {
@@ -43,6 +42,8 @@ public class GoodsList_upload {
 			int price = resSet.getInt("price");
 			goodsList.put(SKU, price);
 		}
+		statmt.close();
+		resSet.close();
 		return goodsList;
 	}
 	
@@ -52,13 +53,23 @@ public class GoodsList_upload {
 		resSet = statmt.executeQuery("Select * from Goodlist WHERE SKU_id = " + id + ";");
 		Bill1.add(resSet.getString("SKU_name"));
 		BillPrice.add(resSet.getInt("price"));
+		System.out.println("Position added. Positions in the receipt: " + Bill1.size());
+		totalSumm += resSet.getInt("price");
+		statmt.close();
+		resSet.close();
 	}
 	
 	public static void PrintReceipt() {
-		for (int i = 0; i < BillPrice.size(); i++) {
-			System.out.print(Bill1.pop() + " " + BillPrice.pop() + "Руб.");
+		int numOfGoods = 0;
+		Date d = new Date();
+		System.out.println(d);
+		while(!BillPrice.isEmpty()) {
+			System.out.print(Bill1.pop() + " " + BillPrice.pop() + " ₽");
 			System.out.println();
+			numOfGoods++;
 		}
+		System.out.println("Number of SKUs: " + numOfGoods);
+		System.out.println("Total: " + totalSumm + " ₽");
 	}
 	
 }

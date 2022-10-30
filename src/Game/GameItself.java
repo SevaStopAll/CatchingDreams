@@ -13,7 +13,7 @@ public class GameItself {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("Hello, Stranger! Let's name your Character!");
-		Hero mainHero = new Hero(sc.nextLine());
+		Hero mainHero = new Hero(sc.nextLine(), 150, 5);
 		System.out.println("Hello, " + mainHero.GetName());
 		System.out.println("So, you are in front of three doors. You don't remember anything. The place, You don't remember it. \nBut you know, somewhere inside, that you can't stop right now, you have to choose the door!");
 		System.out.println("1.Choose 1st door. 2. Choose 2nd door. 3. Choose 3rd door.");
@@ -25,11 +25,11 @@ public class GameItself {
 			
 		
 		case(2):
-			SecondLevel();
+			SecondLevel(mainHero);
 			break;
 		
 		case(3):
-			ThirdLevel();
+			ThirdLevel(mainHero);
 			break;
 		}
 		
@@ -38,14 +38,20 @@ public class GameItself {
 
 public static void FirstLevel(Hero mainHero) {
 	System.out.println("You are in the forest. The door disappeared. And a big wolf is going to hurt you. Defend!");
+	NPC wolf1 = new NPC("Big wolf", 50, 1);
+	mainHero.Fight(mainHero, wolf1);
 }
 
-public static void SecondLevel() {
+public static void SecondLevel(Hero mainHero) {
 	System.out.println("You are in the desert. The door disppeared. And a giant scorpion are going to hurt you. Defend!");
+	NPC Scorpion = new NPC("Giant scorpion", 80, 2);
+	mainHero.Fight(mainHero, Scorpion);
 }
 
-public static void ThirdLevel() {
+public static void ThirdLevel(Hero mainHero) {
 	System.out.println("You are in the middle of the big city. The language is not your native but there is something common. You are walking down the street. \nThere are not a lot of people and one big guy with a knife is going to hurt you. Defend!");
+	NPC Bandit = new NPC("Street bandit", 100, 3);
+	mainHero.Fight(mainHero, Bandit);
 }
 
 }

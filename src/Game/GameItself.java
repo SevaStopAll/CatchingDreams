@@ -11,7 +11,6 @@ public class GameItself {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		
 		System.out.println("Hello, Stranger! Welcome! Let's name your Character!");
 		Hero mainHero = new Hero(sc.nextLine(), 150, 5);
 		System.out.println("Hello, " + mainHero.GetName());

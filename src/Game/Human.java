@@ -2,6 +2,8 @@ package Game;
 
 import java.util.ArrayList;
 
+import Game.Human.NPC;
+
 public abstract class Human {
 	private String name;
 	private int HP = 100;
@@ -53,8 +55,7 @@ public static class Hero extends Human {
 		
 	public Hero(String name, int HP, int Strenght) {
 		super(name, HP, Strenght);
-	}	
-	
+	}
 	
 }
 	
@@ -62,11 +63,18 @@ public static class NPC extends Human {
 
 		public  NPC(String name, int HP, int Strenght) {
 			super(name, HP, Strenght);
-			 
 		}
 		
 }
+
 }
+ /* NPC wolf1 = new NPC("Big wolf", 50, 5);
+NPC Bandit = new NPC("Street bandit", 100, 3);
+NPC Scorpion = new NPC("Giant scorpion", 80, 2);
+ArrayList <NPC> enemies = new ArrayList <>();
+enemies.add(wolf1);
+enemies.add(Scorpion);
+enemies.add(Bandit); */
 	
 		
 		

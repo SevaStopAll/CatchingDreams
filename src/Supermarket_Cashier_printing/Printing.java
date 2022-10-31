@@ -10,7 +10,7 @@ public class Printing {
 	}
 	
 	public static void MachineMenu() throws SQLException {
-		System.out.println("Operations: 1.AddToReceipt 2.PrintReceipt 3.Turn off");
+		System.out.println("Operations: 1.Add To Receipt 2.Print Receipt 3.Update Goodslist 4.Turn off");
 		Scanner sc = new Scanner(System.in);
 		int operation = sc.nextInt();
 		switch(operation) {

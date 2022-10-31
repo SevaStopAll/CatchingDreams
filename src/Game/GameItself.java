@@ -12,7 +12,7 @@ public class GameItself {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Hello, Stranger! Let's name your Character!");
+		System.out.println("Hello, Stranger! Welcome! Let's name your Character!");
 		Hero mainHero = new Hero(sc.nextLine(), 150, 5);
 		System.out.println("Hello, " + mainHero.GetName());
 		System.out.println("So, you are in front of three doors. You don't remember anything. The place, You don't remember it. \nBut you know, somewhere inside, that you can't stop right now, you have to choose the door!");
@@ -23,7 +23,6 @@ public class GameItself {
 			FirstLevel(mainHero);
 			break;
 			
-		
 		case(2):
 			SecondLevel(mainHero);
 			break;
@@ -38,7 +37,7 @@ public class GameItself {
 
 public static void FirstLevel(Hero mainHero) {
 	System.out.println("You are in the forest. The door disappeared. And a big wolf is going to hurt you. Defend!");
-	NPC wolf1 = new NPC("Big wolf", 50, 1);
+	NPC wolf1 = new NPC("Big wolf", 50, 5);
 	mainHero.Fight(mainHero, wolf1);
 }
 

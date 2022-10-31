@@ -1,10 +1,12 @@
 package Game;
 
+import java.util.ArrayList;
 
 public abstract class Human {
 	private String name;
 	private int HP = 100;
 	private int Strenght;
+	ArrayList<Item> inventory = new ArrayList<>();
 	
 	public Human(String name) {
 		this.name = name;
@@ -24,25 +26,25 @@ public abstract class Human {
 		return HP;
 	}
 	
-	public int getStrenght(Human human) {
-		return human.Strenght;
+	public int getStrenght() {
+		return Strenght;
 	}
 	
 	public void Hit(Human attacker, Human defender) {
-		defender.HP -= attacker.getStrenght(attacker);
+		defender.HP -= (int)(1 + Math.random() * attacker.getStrenght()) + 1;
 	}
 	
 	public void Fight(Human attacker, Human defender) {
-		while (attacker.HP != 0 && defender.HP != 0) {
+		while (attacker.HP > 1 && defender.HP > 1) {
 		attacker.Hit(attacker, defender);
 		System.out.println(defender.GetName()+ " HP " + defender.getHP());
 		defender.Hit(defender, attacker);
 		System.out.println(attacker.GetName() + " HP " + attacker.getHP());
 		}
-		if (defender.HP == 0) {
+		if (defender.HP <= 0) {
 			System.out.println(defender.GetName() +" is dead.");
 		}
-		else { 
+		if (attacker.HP <= 0) { 
 			System.out.println("You are dead.");
 	}
 	}

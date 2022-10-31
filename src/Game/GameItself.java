@@ -39,6 +39,9 @@ public static void FirstLevel(Hero mainHero) {
 	System.out.println("You are in the forest. The door disappeared. And a big wolf is going to hurt you. Defend!");
 	NPC wolf1 = new NPC("Big wolf", 50, 5);
 	mainHero.Fight(mainHero, wolf1);
+	if (mainHero.getHP() > 0) {
+		System.out.println("The predator is dead and you can look around. Tall trees, green as emeralds, pines, oaks and a lot of other trees you don't names. \nThere is a bird songs, air is completely pure. You are not scared, it's really interesting to know, where are you.");	
+	}
 }
 
 public static void SecondLevel(Hero mainHero) {

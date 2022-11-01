@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import Game.Human.Hero;
 import Game.Human.NPC;
+import Game.Item.Weapon;
 
 
 // \n - переход на другую строку 
@@ -47,12 +48,21 @@ public static void SecondLevel(Hero mainHero) {
 	System.out.println("You are in the desert. The door disppeared. And a giant scorpion are going to hurt you. Defend!");
 	NPC Scorpion = new NPC("Giant scorpion", 80, 2);
 	mainHero.Fight(mainHero, Scorpion);
+	if (mainHero.getHP() > 0) {
+		System.out.println("Now there is nothing to hurt you, and you can look around. Sand, mountains of sand around you until horizon. And the sun wants to fry you like a peace of meat. \nYou try to focus on lands to remark any signs of mankind.");
+	}
 }
 
 public static void ThirdLevel(Hero mainHero) {
 	System.out.println("You are in the middle of the big city. The language is not your native but there is something common. You are walking down the street. \nThere are not a lot of people and one big guy with a knife is going to hurt you. Defend!");
 	NPC Bandit = new NPC("Street bandit", 100, 3);
 	mainHero.Fight(mainHero, Bandit);
+	Weapon IronSword = new Weapon();
+	// REPAIRE
+	addItem(IronSword);
+	if (mainHero.getHP() > 0) {
+		System.out.println("The bandit isn't breathing. Unfortunately, he is dead and you can't ask him anything. And you are in the poor city quarter. \nThere are no light and no guards here. And you decided to ask the way.");
+	}
 }
 
 }

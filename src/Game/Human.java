@@ -2,13 +2,11 @@ package Game;
 
 import java.util.ArrayList;
 
-import Game.Human.NPC;
-
 public abstract class Human {
 	private String name;
 	private int HP = 100;
 	private int Strenght;
-	ArrayList<Item> inventory = new ArrayList<>();
+	
 	
 	public Human(String name) {
 		this.name = name;
@@ -51,10 +49,17 @@ public abstract class Human {
 	}
 	}
 	
+
+	
 public static class Hero extends Human {
 		
 	public Hero(String name, int HP, int Strenght) {
 		super(name, HP, Strenght);
+		ArrayList<Item> inventory = new ArrayList<>();
+	}
+	 REPAIRE
+	public void AddItem(Item item, ArrayList<Item> inventory) {
+		inventory.add(item);
 	}
 	
 }

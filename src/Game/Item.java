@@ -4,19 +4,48 @@ public class Item {
 	String name; 
 	int price; 
 	String description;
+	int damage = 0;
+	int defence = 0;
 	
-public static class Weapon extends Item {
-	int Damage;
+	public Item(String name, int price, String descpiption){
+		this.name = name;
+		this.price = price;
+		this.description = descpiption;
+	
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
+	public int getDefence() {
+		return defence;
+	}
+	
+	public int getDamage() {
+		return damage;
+	}
+	
+}
+	
+class Weapon extends Item {
+
+	public Weapon(String name, int price, String description, int damage) {
+		super(name, price, description);
+		this.damage = damage;
+	}
+	
 }	
 
-public static class Armor extends Item {
-	int Defence;
+
+class Armor extends Item {
+
+	public Armor(String name, int price, String description, int defence) {
+		super(name, price, description);
+		this.defence = defence;
+	}
+	
 }
-Weapon IronSword = new Weapon();
-Weapon SilverSword = new Weapon();
-Weapon Bow = new Weapon();
-Armor LeatherArmor = new Armor();
-Armor IronArmor = new Armor();
 
 
-}
+

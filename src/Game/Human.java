@@ -8,6 +8,7 @@ public abstract class Human {
 	private int Strenght;
 	private static int defence = 0;
 	private static int attack = 0;
+	private int luck = 1;
 	
 	
 	public Human(String name, int HP, int Strenght) {
@@ -36,21 +37,46 @@ public abstract class Human {
 		return defence;
 	}
 	
-	public void Hit(Human attacker, Human defender) {
-		defender.HP -= (int)(1 + Math.random() * (attacker.getStrenght() + attacker.getAttack()) + 1);
+	public void setLuck(int luck) {
+		this.luck = luck;
+		System.out.println("Now your Luck is " + getLuck());
 	}
 	
-	public void Fight(Human attacker, Human defender) {
-		while (attacker.HP > 1 && defender.HP > 1) {
-		attacker.Hit(attacker, defender);
-		System.out.println(defender.GetName()+ " HP " + defender.getHP());
-		defender.Hit(defender, attacker);
-		System.out.println(attacker.GetName() + " HP " + attacker.getHP());
+	public int getLuck() {
+		return luck;
+	}
+	
+	public void hit(Human attacker, Human defender) {
+		if (defender.getDefence() > (attacker.getAttack() + attacker.getStrenght())) {
+			defender.HP -= (int)(1 + Math.random() * 1 + 1);
+		} else {
+		defender.HP -= (int)(1 + Math.random() * (attacker.getStrenght() + attacker.getAttack() - defender.getDefence()) + 1);
 		}
-		if (defender.HP <= 0) {
+	}
+	
+	public void criticalHit(Human attacker, Human defender) {
+		defender.HP -=(int)(2*(1 + Math.random() * (attacker.getStrenght() + attacker.getAttack() - defender.getDefence()) + 1));
+	}
+	
+	public void fight(Human attacker, Human defender) {
+		while (attacker.getHP() > 0 && defender.getHP() > 0) {
+		    int criticalHitChance = 5;
+		    int thisChance = (int)(Math.random()*95 + criticalHitChance + attacker.getLuck());
+		    System.out.println("This chance now is " + thisChance);
+			if (thisChance > 90) {
+				attacker.criticalHit(attacker, defender);
+				System.out.println("Critical");
+			}
+		attacker.hit(attacker, defender);
+		System.out.println(defender.GetName()+ " HP " + defender.getHP());
+		defender.hit(defender, attacker);
+		System.out.println(attacker.GetName() + " HP " + attacker.getHP());
+		
+		}
+		if (defender.getHP() <= 0) {
 			System.out.println(defender.GetName() +" is dead.");
 		}
-		if (attacker.HP <= 0) { 
+		if (attacker.getHP() <= 0) { 
 			System.out.println("You are dead.");
 	}
 	}
@@ -63,7 +89,7 @@ public static class Hero extends Human {
 		
 	}
 	
-	public int GetInventorySize() {
+	public int getInventorySize() {
 		return inventory.size();
 	}
 	
@@ -89,7 +115,7 @@ public static class Hero extends Human {
 		addDefence();
 	}
 	
-	public void WatchInventory() {
+	public void watchInventory() {
 		for (int i = 0; i < inventory.size(); i++) {
 			System.out.println((i+1) + " " + inventory.get(i).getDescription());
 		}

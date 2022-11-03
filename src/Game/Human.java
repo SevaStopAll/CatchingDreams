@@ -4,18 +4,18 @@ import java.util.ArrayList;
 
 public abstract class Human {
 	private String name;
-	private int HP = 100;
+	private int HP = (int)(50 + Math.random() * 100);
 	private int Strenght;
 	private static int defence = 0;
 	private static int attack = 0;
 	private int luck = 1;
 	
 	
-	public Human(String name, int HP, int Strenght) {
+	public Human(String name, int Strenght) {
 		this.name = name;
-		this.HP = HP;
 		this.Strenght = Strenght;
 	}
+	
 	
 	public String GetName() {
 		return name;
@@ -23,6 +23,10 @@ public abstract class Human {
 	
 	public int getHP() {
 		return HP;
+	}
+	
+	public void setHP() {
+		HP = 150;
 	}
 	
 	public int getStrenght() {
@@ -84,10 +88,13 @@ public abstract class Human {
 public static class Hero extends Human {
 	 ArrayList<Item> inventory = new ArrayList<Item>();
 
-	public Hero(String name, int HP, int Strenght) {
-		super(name, HP, Strenght);
+	public Hero(String name, int Strenght) {
+		super(name, Strenght);
+		setHP();
+		System.out.println("Your HP is" + getHP());
 		
 	}
+	
 	
 	public int getInventorySize() {
 		return inventory.size();
@@ -124,8 +131,8 @@ public static class Hero extends Human {
 
 public static class NPC extends Human {
 
-		public  NPC(String name, int HP, int Strenght) {
-			super(name, HP, Strenght);
+		public  NPC(String name, int Strenght) {
+			super(name, Strenght);
 		}	
 }
 

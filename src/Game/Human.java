@@ -9,6 +9,7 @@ public abstract class Human {
 	private static int defence = 0;
 	private static int attack = 0;
 	private int luck = 1;
+	int exp;
 	
 	
 	public Human(String name, int Strenght) {
@@ -50,6 +51,10 @@ public abstract class Human {
 		return luck;
 	}
 	
+	public int getExp() {
+		return exp;
+	}
+	
 	public void hit(Human attacker, Human defender) {
 		if (defender.getDefence() > (attacker.getAttack() + attacker.getStrenght())) {
 			defender.HP -= (int)(1 + Math.random() * 1 + 1);
@@ -87,14 +92,21 @@ public abstract class Human {
 		
 public static class Hero extends Human {
 	 ArrayList<Item> inventory = new ArrayList<Item>();
-
+	 int heroExp = 0;
+	 
 	public Hero(String name, int Strenght) {
 		super(name, Strenght);
 		setHP();
-		System.out.println("Your HP is" + getHP());
+		System.out.println("Your HP is " + getHP());
+		
 		
 	}
 	
+	public int getExp() {
+		return heroExp;
+	}
+	
+	// write a method for get exp from enemies
 	
 	public int getInventorySize() {
 		return inventory.size();
@@ -130,9 +142,10 @@ public static class Hero extends Human {
 }
 
 public static class NPC extends Human {
-
-		public  NPC(String name, int Strenght) {
+		
+		public  NPC(String name, int Strenght, int exp) {
 			super(name, Strenght);
+			this.exp = exp;
 		}	
 }
 

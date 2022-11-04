@@ -8,6 +8,7 @@ public abstract class Human {
 	private int Strenght = (int)(1 + Math.random() * 10);
 	private int Constitution = (int)(1 + Math.random() * 10);
 	private int HP = (int)(50 + Math.random() * 50) + (Constitution * 5);
+	private int baseHP = HP;
 	private int Dexterity = (int)(1 + Math.random() * 10);
 	private int Luck = (int)(1 + Math.random() * 10);
 	int exp;
@@ -36,6 +37,18 @@ public abstract class Human {
 	
 	public int getHP() {
 		return HP;
+	}
+	
+	public void restoreHP() {
+		if (HP + baseHP*0.5 < baseHP) {
+		HP += baseHP*0.5;
+		} else {
+		HP = baseHP;	
+		}
+	}
+	
+	public int getbaseHP() {
+		return baseHP;
 	}
 	
 	public int getGold() {
@@ -135,11 +148,12 @@ public abstract class Human {
 			System.out.println(defender.getName() + " has " + defender.getHP() + "HP");
 			defender.hit(defender, attacker);
 			System.out.println(attacker.getName() + " has " + attacker.getHP() + "HP");
-			System.out.println("Press Enter to continue");
-			sc.nextLine();
+			// It will be useful when I create Fight System System.out.println("Press Enter to continue"); 
+			// sc.nextLine();
 		}
 		if (defender.getHP() <= 0) {
 			System.out.println(defender.getName() +" is dead.");
+			attacker.restoreHP();
 			earnExp(attacker, defender);
 			if (attacker.getExp() >= Hero.nextLevelExp) {
 				Hero.nextLevelExp += Hero.nextLevelExp*2;
@@ -241,16 +255,24 @@ public static class Hero extends Human {
 }
 
 public static class NPC extends Human {
-		
-		public  NPC(String name, int exp) {
+			int level;
+			
+			
+		public  NPC(String name, int exp, int level) {
 			super(name);
 			this.exp = exp;
-		}	
+			this.level = level;
+		}
+		
+		public int getLevel() {
+			return level;
+		}
 		
 		public NPC(String name, int Strenght, int exp, int Constitution, int Dexterity) {
 			super(name, Strenght, exp, Constitution, Dexterity);
 			}
-		}
+
+}
 }
 
 

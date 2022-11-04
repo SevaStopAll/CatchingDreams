@@ -1,24 +1,36 @@
 package Game;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public abstract class Human {
 	private String name;
-	private int HP = (int)(50 + Math.random() * 100);
-	private int Strenght;
+	private int Strenght = (int)(1 + Math.random() * 10);
+	private int Constitution = (int)(1 + Math.random() * 10);
+	private int HP = (int)(50 + Math.random() * 50) + (Constitution * 5);
+	private int Dexterity = (int)(1 + Math.random() * 10);
+	private int Luck = (int)(1 + Math.random() * 10);
+	int exp;
 	private static int defence = 0;
 	private static int attack = 0;
-	private int luck = 1;
-	int exp;
+	private int gold = 0;
+
 	
-	
-	public Human(String name, int Strenght) {
+	public Human(String name) {
 		this.name = name;
-		this.Strenght = Strenght;
+		
 	}
 	
+	public Human(String name, int Strenght, int Constitution, int Dexterity, int exp) {
+		this.name = name;
+		this.Strenght = Strenght;
+		this.Constitution = Constitution;
+		this.Dexterity = Dexterity; 
+		this.exp = exp;
+		
+	}
 	
-	public String GetName() {
+	public String getName() {
 		return name;
 	}
 	
@@ -26,12 +38,44 @@ public abstract class Human {
 		return HP;
 	}
 	
-	public void setHP() {
-		HP = 150;
+	public int getGold() {
+		return gold;
+	}
+	
+	public void setGold(Human attacker, Human defender) {
+		attacker.gold = attacker.getGold() + defender.getGold(); 
+	}
+
+	public void watchParams() {
+		System.out.println("Your Strenght " + getStrenght());
+		System.out.println("Your Constitution " + getConstitution());
+		System.out.println("Your Dexterity " + getDexterity());
+		System.out.println("Your Luck " + getLuck());
+		System.out.println("Your have " + getGold() + " gold pieces");
 	}
 	
 	public int getStrenght() {
 		return Strenght;
+	}
+	
+	public void setStrenght() {
+		Strenght = getStrenght() + 1;
+	}
+	
+	public int getConstitution() {
+		return Constitution;
+	}
+
+	public void setConstitution() {
+		Constitution = getConstitution() + 1;
+	}
+	
+	public int getDexterity() {
+		return Dexterity;
+	}
+	
+	public void setDexterity() {
+		Dexterity = getDexterity() + 1;
 	}
 	
 	public int getAttack() {
@@ -42,13 +86,12 @@ public abstract class Human {
 		return defence;
 	}
 	
-	public void setLuck(int luck) {
-		this.luck = luck;
-		System.out.println("Now your Luck is " + getLuck());
+	public void setLuck() {
+		Luck = getLuck() + 1;
 	}
 	
 	public int getLuck() {
-		return luck;
+		return Luck;
 	}
 	
 	public int getExp() {
@@ -60,7 +103,11 @@ public abstract class Human {
 	}
 	
 	public void hit(Human attacker, Human defender) {
-		if (defender.getDefence() > (attacker.getAttack() + attacker.getStrenght())) {
+		int MissingChance =(int)(1 + Math.random() * 100) - defender.getDexterity();
+		if (MissingChance < 15) {
+			System.out.println(attacker.getName() + " Missed");
+		}
+		else if (defender.getDefence() > (attacker.getAttack() + attacker.getStrenght())) {
 			defender.HP -= (int)(1 + Math.random() * 1 + 1);
 		} else {
 		defender.HP -= (int)(1 + Math.random() * (attacker.getStrenght() + attacker.getAttack() - defender.getDefence()) + 1);
@@ -68,45 +115,62 @@ public abstract class Human {
 	}
 	
 	public void criticalHit(Human attacker, Human defender) {
-		defender.HP -=(int)(2*(1 + Math.random() * (attacker.getStrenght() + attacker.getAttack() - defender.getDefence()) + 1));
+		int criticalHitChance = 3;
+	    int thisChance = (int)(Math.random()*95 + criticalHitChance + attacker.getLuck());
+		if (thisChance > 90) {
+			defender.HP -=(int)(2*(1 + Math.random() * (attacker.getStrenght() + attacker.getAttack() - defender.getDefence()) + 1));
+			System.out.println(attacker.getName() + " did critical hit");
+		}
 	}
 	
 	public void fight(Human attacker, Human defender) {
+		Scanner sc = new Scanner(System.in);
+		int turn = 1;
 		while (attacker.getHP() > 0 && defender.getHP() > 0) {
-		    int criticalHitChance = 5;
-		    int thisChance = (int)(Math.random()*95 + criticalHitChance + attacker.getLuck());
-		    System.out.println("This chance now is " + thisChance);
-			if (thisChance > 90) {
-				attacker.criticalHit(attacker, defender);
-				System.out.println("Critical");
-			}
-		attacker.hit(attacker, defender);
-		System.out.println(defender.GetName()+ " HP " + defender.getHP());
-		defender.hit(defender, attacker);
-		System.out.println(attacker.GetName() + " HP " + attacker.getHP());
-		
+			System.out.println("TURN " + turn);
+			turn++;
+			criticalHit(attacker, defender);
+			criticalHit(defender, attacker);
+			attacker.hit(attacker, defender);
+			System.out.println(defender.getName() + " has " + defender.getHP() + "HP");
+			defender.hit(defender, attacker);
+			System.out.println(attacker.getName() + " has " + attacker.getHP() + "HP");
+			System.out.println("Press Enter to continue");
+			sc.nextLine();
 		}
 		if (defender.getHP() <= 0) {
-			System.out.println(defender.GetName() +" is dead.");
+			System.out.println(defender.getName() +" is dead.");
 			earnExp(attacker, defender);
 			if (attacker.getExp() >= Hero.nextLevelExp) {
 				Hero.nextLevelExp += Hero.nextLevelExp*2;
 				System.out.println("New level! Next level with EXP " + Hero.nextLevelExp);
+				Hero.setPoints();
+				System.out.println("You have " + Hero.getPoints() + " points.");	
 			} 
 		}
 		if (attacker.getHP() <= 0) { 
 			System.out.println("You are dead.");
+			sc.close();
 	}
 	}
+
 
 public static class Hero extends Human {
 	 ArrayList<Item> inventory = new ArrayList<Item>();
 	 public static int nextLevelExp = 100;
+	 private static int levelPoints = 0;
 	 
-	public Hero(String name, int Strenght) {
-		super(name, Strenght);
-		setHP();
+	public Hero(String name) {
+		super(name);
 		System.out.println("Your HP is " + getHP());
+	}
+	
+	public static void setPoints() {
+		levelPoints += 3;
+	}
+	
+	public static int getPoints() {
+		return levelPoints;
 	}
 	
 	public int getInventorySize() {
@@ -140,17 +204,58 @@ public static class Hero extends Human {
 			System.out.println((i+1) + " " + inventory.get(i).getDescription());
 		}
 	}
+	
+	public void LevelUp() {
+		Scanner sc = new Scanner(System.in);
+		while(true) {
+			if (levelPoints > 0) {
+				System.out.println("What parameter would you like to change");
+				System.out.println("1. Strenght 2. Constitution 3.Dexterity 4. Luck");
+				int param = sc.nextInt();
+				switch (param) {
+					case(1):
+						setStrenght();
+						levelPoints--;
+						break;
+					case(2):
+						setConstitution();
+						levelPoints--;
+						break;
+					case(3):
+						setDexterity();
+						levelPoints--;
+						break;
+					case(4):	
+						setLuck();
+						levelPoints--;
+						break;
+				}
+			} else {
+		System.out.println("You don't have points");
+		watchParams();
+		sc.close();
+		return;
+		}
+		} 
+	}
 }
 
 public static class NPC extends Human {
 		
-		public  NPC(String name, int Strenght, int exp) {
-			super(name, Strenght);
+		public  NPC(String name, int exp) {
+			super(name);
 			this.exp = exp;
 		}	
+		
+		public NPC(String name, int Strenght, int exp, int Constitution, int Dexterity) {
+			super(name, Strenght, exp, Constitution, Dexterity);
+			}
+		}
 }
 
-}
+
+
+
 
 	
 		

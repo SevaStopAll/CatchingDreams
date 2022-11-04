@@ -55,6 +55,10 @@ public abstract class Human {
 		return exp;
 	}
 	
+	public void earnExp(Human attacker, Human defender){
+		attacker.exp = attacker.getExp() + defender.getExp();
+	}
+	
 	public void hit(Human attacker, Human defender) {
 		if (defender.getDefence() > (attacker.getAttack() + attacker.getStrenght())) {
 			defender.HP -= (int)(1 + Math.random() * 1 + 1);
@@ -84,29 +88,26 @@ public abstract class Human {
 		}
 		if (defender.getHP() <= 0) {
 			System.out.println(defender.GetName() +" is dead.");
+			earnExp(attacker, defender);
+			if (attacker.getExp() >= Hero.nextLevelExp) {
+				Hero.nextLevelExp += Hero.nextLevelExp*2;
+				System.out.println("New level! Next level with EXP " + Hero.nextLevelExp);
+			} 
 		}
 		if (attacker.getHP() <= 0) { 
 			System.out.println("You are dead.");
 	}
 	}
-		
+
 public static class Hero extends Human {
 	 ArrayList<Item> inventory = new ArrayList<Item>();
-	 int heroExp = 0;
+	 public static int nextLevelExp = 100;
 	 
 	public Hero(String name, int Strenght) {
 		super(name, Strenght);
 		setHP();
 		System.out.println("Your HP is " + getHP());
-		
-		
 	}
-	
-	public int getExp() {
-		return heroExp;
-	}
-	
-	// write a method for get exp from enemies
 	
 	public int getInventorySize() {
 		return inventory.size();

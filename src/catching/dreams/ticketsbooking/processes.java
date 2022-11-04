@@ -24,7 +24,6 @@ public static void WatchFlightTable() throws SQLException {
 			String destination = resSet.getString("flight_destination");
 			int freeSeats = resSet.getInt("free_seats");
 			// Add date 
-			// Add PrintF()
 			System.out.printf("Number %-5s" + " | " + "Destination: %-20s" + " | " + "Free Seats: %-3d\n" , flNumber, destination, freeSeats );
 		}	
 }
@@ -45,8 +44,7 @@ public static void BuyTicket() throws SQLException {
 
 public static void WatchPassangers() throws SQLException {
 	statmt = conn.createStatement();
-	// Sort by Number than sort by Name;
-	resSet = statmt.executeQuery("Select * from Flight_passangers");
+	resSet = statmt.executeQuery("Select * from Flight_passangers ORDER BY Flight, Name_Surname");
 	while(resSet.next()) {
 		int flNumber = resSet.getInt("Flight");
 		String nameSurname = resSet.getString("Name_Surname");

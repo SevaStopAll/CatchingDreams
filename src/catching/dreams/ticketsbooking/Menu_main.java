@@ -7,7 +7,7 @@ public class Menu_main {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		processes.Conn();
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Welcome to CathingDreams Airlines. Soon here will be our service to book your airticket. \nWhat do we want to realise \n1.Flights list with destination and time. 2. You can registrate youself and buy a ticket. \n3. Our employers will be able to watch passangers list for security reasons.");
+		System.out.println("Welcome to CathingDreams Airlines. \n1.Flights list with destination and time. 2. Buy a ticket. \n3. Watch passangers list.");
 		int operation = sc.nextInt();
 		if (operation == 1) {
 			processes.WatchFlightTable();

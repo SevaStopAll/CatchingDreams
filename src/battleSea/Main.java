@@ -45,7 +45,6 @@ public class Main {
 				}
 			} else {
 				System.out.println("You did this turn before");
-				
 			}
 			System.out.println("Enemy's turn");
 			int [] turn1 = new int[2];
@@ -93,14 +92,6 @@ public class Main {
 			}
 		}
 		return ships;
-	}
-	
-	public static String turn() {
-		int [] turn1 = new int[2];
-		turn1[0] = (int)(1 + Math.random() * 5);
-		turn1[1] = (int)(1 + Math.random() * 5);
-		String aTurn2 = turn1[0] + " " + turn1[1];
-		return aTurn2;
 	}
 
 }

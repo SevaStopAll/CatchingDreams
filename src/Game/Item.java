@@ -18,6 +18,10 @@ public class Item {
 		return description;
 	}
 	
+	public int getPrice() {
+		return price;
+	}
+	
 	public int getDefence() {
 		return defence;
 	}
@@ -25,6 +29,7 @@ public class Item {
 	public int getDamage() {
 		return damage;
 	}
+	
 	
 }
 	

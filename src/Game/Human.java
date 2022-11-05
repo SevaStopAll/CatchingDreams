@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public abstract class Human {
-	private String name;
-	private int Strenght = (int)(1 + Math.random() * 10);
-	private int Constitution = (int)(1 + Math.random() * 10);
-	private int HP = (int)(50 + Math.random() * 50) + (Constitution * 5);
-	private int baseHP = HP;
-	private int Dexterity = (int)(1 + Math.random() * 10);
-	private int Luck = (int)(1 + Math.random() * 10);
+	protected String name;
+	protected int Strenght = (int)(1 + Math.random() * 10);
+	protected int Constitution = (int)(1 + Math.random() * 10);
+	protected int HP = (int)(50 + Math.random() * 50) + (Constitution * 5);
+	protected int baseHP = HP;
+	protected int Dexterity = (int)(1 + Math.random() * 10);
+	protected int Luck = (int)(1 + Math.random() * 10);
 	int exp;
-	private static int defence = 0;
-	private static int attack = 0;
-	private int gold = 0;
+	protected static int defence = 0;
+	protected static int attack = 0;
+	protected int gold = 100;
 
 	
 	public Human(String name) {
@@ -168,8 +168,9 @@ public abstract class Human {
 	}
 	}
 
+} // End of Human.Class
 
-public static class Hero extends Human {
+class Hero extends Human {
 	 ArrayList<Item> inventory = new ArrayList<Item>();
 	 public static int nextLevelExp = 100;
 	 private static int levelPoints = 0;
@@ -245,18 +246,17 @@ public static class Hero extends Human {
 						break;
 				}
 			} else {
-		System.out.println("You don't have points");
-		watchParams();
-		sc.close();
-		return;
-		}
+				System.out.println("You don't have points");
+				watchParams();
+				sc.close();
+				return;
+			}
 		} 
 	}
 }
 
-public static class NPC extends Human {
+class NPC extends Human {
 			int level;
-			
 			
 		public  NPC(String name, int exp, int level) {
 			super(name);
@@ -264,6 +264,9 @@ public static class NPC extends Human {
 			this.level = level;
 		}
 		
+		public void speak() {
+			System.out.println(getName() + " told you: You sholdn't be there");
+		}
 		public int getLevel() {
 			return level;
 		}
@@ -273,7 +276,24 @@ public static class NPC extends Human {
 			}
 
 }
+
+class Merchant extends NPC {
+	ArrayList<Item> shop = new ArrayList<Item>();
+	
+	public Merchant (String name, int exp, int level) {
+		super(name, exp, level);
+	}
+	
+	public void trade(Hero hero, Merchant merchant) {
+		System.out.println("Welcome to my little shop");
+		for (int i = 0; i < shop.size(); i++) {
+			System.out.print((i+1) + " " + shop.get(i).getDescription());
+			System.out.println((i+1) + " " + shop.get(i).getPrice());;
+		}
+	}
 }
+
+
 
 
 

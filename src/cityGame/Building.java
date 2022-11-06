@@ -1,6 +1,5 @@
 package cityGame;
 
-
 public class Building {
 	private final String name; 
 	private int price; 
@@ -10,11 +9,10 @@ public class Building {
 	private int addStone;
 	private int addIron;
 	private int addPopularity;
-
-
+	private int limit;
+	private int currentNumb = 0;
 	
-	
-	public Building(String name, int price, int buildTime, int addWood, int addGold, int addStone, int addIron, int addPopularity) {
+	public Building(String name, int price, int buildTime, int addWood, int addGold, int addStone, int addIron, int addPopularity, int limit) {
 		this.name = name;
 		this.price = price;
 		this.buildTime = buildTime;
@@ -22,11 +20,9 @@ public class Building {
 		this.addGold = addGold;
 		this.addStone = addStone;
 		this.addIron = addIron;
+		this.limit = limit;
 	}
 	
-	public void getInfo() {
-		
-	}
 	public String getName() {
 		return name;
 	}
@@ -59,6 +55,18 @@ public class Building {
 	
 	public int getAddPopularity() {
 		return addPopularity;
+	}
+	
+	public void plusNumb() {
+		currentNumb++;
+	}
+	
+	public int getCurrentNumb() {
+		return currentNumb;
+	}
+	
+	public int getLimit() {
+		return limit;
 	}
 }
 

@@ -1,6 +1,8 @@
 package cityGame;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class City {
 	// Base parameters: 
@@ -8,9 +10,10 @@ public class City {
 	private int population = (int)(1 + Math.random() * 100); 
 	private int freePopulation = population;
 	private int popularity = 50; 
-	private ArrayList <Building> yourBuildings = new ArrayList<>();
+	private List <Building> yourBuildings = new LinkedList<>();
+	private List <Building> buildList = new LinkedList<>();
 	private int populationPerTurn = (int) (population * 0.05);
-	private ArrayList <Warrior> guard = new ArrayList<>();
+	private List <Warrior> guard = new LinkedList<>();
 	private int age = 1;
 	// Resources 
 	private int gold = (int)(1 + Math.random() * 100);
@@ -23,15 +26,18 @@ public class City {
 	public String getName() {
 		return name;
 	}
+	
+	// This method show you all information about your city
+	public void getInfo() {
+		System.out.println("Age " + getAge() + " Gold " + getGold() + " Population " + getPopulation() + " Popularity " + getPopularity());
+	}
 	public int getPopulationPerTurn() {
 		return populationPerTurn;
 	}
 	public void setPopulationPerTurn(int populationPerTurn) {
 		this.populationPerTurn = populationPerTurn;
 	}
-	public ArrayList<Warrior> getGuard() {
-		return guard;
-	}
+	
 	public void setGuard(ArrayList<Warrior> guard) {
 		this.guard = guard;
 	}
@@ -90,10 +96,10 @@ public class City {
 		*/
 		age++;
 		this.population += populationPerTurn;
-		this.gold += goldPerTurn;
-		this.wood += getAllWood();
-		this.iron += getAllIron();
-		this.stone += getAllStone();
+		this.gold += goldPerTurn + collectAllGold();
+		this.wood += collectAllWood();
+		this.iron += collectAllIron();
+		this.stone += collectAllStone();
 		this.popularity += getAllPopularity();	
 	}
 	
@@ -104,18 +110,23 @@ public class City {
 		this.freePopulation = freePopulation;
 	}
 	
-	public void Build(Building building) {
+	public void buyBuilding(Building building) {
+		this.gold -= building.getPrice();
+	}
+	
+	//When you are set a building, first the app compare how many building you've already built. Then
+	public void Build(City city, Building building) {
+		if (building.getCurrentNumb() < building.getLimit() && city.getGold() > building.getPrice()) {
 		yourBuildings.add(building);
-		getAllGold();
-		getAllWood();
-		getAllIron();
-		getAllStone();
-		getAllPopularity();
+		city.buyBuilding(building);
+		} else {
+			System.out.println("You have built maximum of this buildings or you don't have enought gold");
+		}
 	}
 	
 	
 	// These methods collect all Add resources for add nextTurn(); 
-	public int getAllGold() {
+	public int collectAllGold() {
 		int allGold = 0;
 		for (Building building: yourBuildings) {
 			allGold += building.getAddGold();
@@ -123,7 +134,7 @@ public class City {
 		return allGold;
 	}
 	
-	public int getAllWood() {
+	public int collectAllWood() {
 		int allWood = 0;
 		for (Building building: yourBuildings) {
 			allWood += building.getAddWood();
@@ -131,7 +142,7 @@ public class City {
 		return allWood;
 	}
 	
-	public int getAllIron() {
+	public int collectAllIron() {
 		int allIron = 0;
 		for (Building building: yourBuildings) {
 			allIron += building.getAddIron();
@@ -146,7 +157,7 @@ public class City {
 		}
 		return allPopularity;
 	}
-	public int getAllStone() {
+	public int collectAllStone() {
 		int allStone = 0;
 		for (Building building: yourBuildings) {
 			allStone += building.getAddStone(); 
@@ -155,4 +166,33 @@ public class City {
 	}
 	
 	
+// Here are all the buildings you can build. And here you can add new ones. 
+	public void setBuildList() {
+		 Building villageHall = new Building("Village Hall", 0, 0, 0, 50, 0, 0, 1, 1);
+		 Building villageTemple = new Building("VillageTemple", 100, 0, 0, 0, 0, 0, 3, 1);
+		 Building inn = new Building("Inn", 50, 0, 0, 35, 0, 0, 3, 2);
+		 Building mine = new Building("Mine", 50, 0, 0, 0, 0, 5, 0, 1);
+		 Building sawmill = new Building("Sawmill", 50, 0, 5, 0, 0, 0, 0, 1);
+		 Building quarry = new Building("Quarry", 100, 0, 0, 0, 5, 0, 0, 1);
+		buildList.add(villageHall);
+		buildList.add(villageTemple);
+		buildList.add(inn);
+		buildList.add(mine);
+		buildList.add(sawmill);
+		buildList.add(quarry);
+	}
+	
+	// this method create the building when you are creating it
+	public Building getBuilding(int number) {
+		Building build = buildList.get(number);
+		return build;
+	}
+	// this method show the name of building and its price.
+	public void watchBuildlist() {
+		int numb = 0;
+		for(Building building: buildList) {
+			System.out.println(numb + " " + building.getName() + " " + building.getPrice());
+			numb ++;
+		}
+	}
 }

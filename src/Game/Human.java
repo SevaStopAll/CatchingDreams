@@ -1,6 +1,8 @@
 package Game;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public abstract class Human {
@@ -171,7 +173,7 @@ public abstract class Human {
 } // End of Human.Class
 
 class Hero extends Human {
-	 ArrayList<Item> inventory = new ArrayList<Item>();
+	 List<Item> inventory = new LinkedList<Item>();
 	 public static int nextLevelExp = 100;
 	 private static int levelPoints = 0;
 	 
@@ -278,7 +280,7 @@ class NPC extends Human {
 }
 
 class Merchant extends NPC {
-	ArrayList<Item> shop = new ArrayList<Item>();
+	List<Item> shop = new ArrayList<Item>();
 	
 	public Merchant (String name, int exp, int level) {
 		super(name, exp, level);

@@ -7,20 +7,26 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Hello, player! How would you like to name your city?");
 		City myCity = new City();
+		myCity.setBuildList();
 		Scanner sc = new Scanner(System.in);
 		myCity.setName(sc.next());
 		System.out.println("Your city name is " + myCity.getName());
-		myCity.Build(villageHall);
+		myCity.Build(myCity, myCity.getBuilding(0));
 		while(myCity.getGold() > 0 && myCity.getPopulation() > 0 && myCity.getPopularity() > 0) {
 			myCity.nextTurn();
+			System.out.println("What would you like to do?");
+			System.out.println("1.Build something. 2. Watch information about your city. 3.Send people working.");
+			int action = sc.nextInt();
+			switch (action) {
+				case(1):
+					myCity.watchBuildlist();
+					int building = sc.nextInt();
+					myCity.Build(myCity, myCity.getBuilding(building));
+				case(2):
+					myCity.getInfo();
+				case(3):
+					
+			}
 		}
 	}
-	
-	// List of buildings (String name, int price, int buildTime, int addWood, int addGold, int addStone, int addIron, int addPopularity)
-	static Building villageHall = new Building("Village Hall", 0, 0, 0, 50, 0, 0, 1);
-	static Building villageTemple = new Building("VillageTemple", 100, 0, 0, 0, 0, 0, 3);
-	static Building inn = new Building("Inn", 50, 0, 0, 35, 0, 0, 3);
-	static Building mine = new Building("Mine", 50, 0, 0, 0, 0, 5, 0);
-	static Building sawmill = new Building("Sawmill", 50, 0, 5, 0, 0, 0, 0);
-	static Building quarry = new Building("Quarry", 100, 0, 0, 0, 5, 0, 0);
 }

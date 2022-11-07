@@ -11,8 +11,9 @@ public class Building {
 	private int addPopularity;
 	private int limit;
 	private int currentNumb = 0;
+	private int workers;
 	
-	public Building(String name, int price, int buildTime, int addWood, int addGold, int addStone, int addIron, int addPopularity, int limit) {
+	public Building(String name, int price, int buildTime, int addWood, int addGold, int addStone, int addIron, int addPopularity, int limit, int workers) {
 		this.name = name;
 		this.price = price;
 		this.buildTime = buildTime;
@@ -21,6 +22,7 @@ public class Building {
 		this.addStone = addStone;
 		this.addIron = addIron;
 		this.limit = limit;
+		this.workers = workers;
 	}
 	
 	public String getName() {
@@ -68,6 +70,11 @@ public class Building {
 	public int getLimit() {
 		return limit;
 	}
+
+	public int getWorkers() {
+		return workers;
+	}
+
 }
 
 

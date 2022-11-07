@@ -30,7 +30,6 @@ public class Main {
 				case(3): 
 					myCity.setWarriors(sc.nextInt());
 					break;
-					
 			}
 		}
 	}

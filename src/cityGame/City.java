@@ -22,6 +22,7 @@ public class City {
 	private int wood = 10;
 	private int stone = 10;
 	private int iron = 5;
+	public int food = (int)(1 + Math.random() * 100); // You need food for your population grows and lives
 	
 	
 	public String getName() {
@@ -130,7 +131,7 @@ public class City {
 		if (building.getCurrentNumb() < building.getLimit() && city.getGold() > building.getPrice() && city.getFreePopulation() > building.getWorkers()) {
 		yourBuildings.add(building);
 		city.buyBuilding(building);
-		int allWorkers = city.getPopulation();
+		int allWorkers;
 		allWorkers =-building.getWorkers();
 		} else {
 			System.out.println("We can't build it. Main reasons: you don't have gold, you have the limit, you don't have free workers");
@@ -218,4 +219,17 @@ public class City {
 			numb ++;
 		}
 	}
-}
+	
+	
+	// Here are all the events 
+	Event Testevent = new Event() {
+		@Override
+		public void takePlace() {
+			System.out.println("Hello from event1");
+		}
+	};
+}	
+
+
+	
+

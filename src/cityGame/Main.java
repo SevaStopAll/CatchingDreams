@@ -8,6 +8,7 @@ public class Main {
 		System.out.println("Hello, player! How would you like to name your city?");
 		City myCity = new City();
 		myCity.setBuildList();
+		
 		Scanner sc = new Scanner(System.in);
 		myCity.setName(sc.next());
 		myCity.setFreePopulation();

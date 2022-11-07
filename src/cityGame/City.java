@@ -14,6 +14,7 @@ public class City {
 	private List <Building> buildList = new LinkedList<>();
 	private int populationPerTurn = (int) (population * 0.05);
 	private List <Warrior> guard = new LinkedList<>();
+	private int warriors = 0;
 	private int age = 1;
 	// Resources 
 	private int gold = (int)(1 + Math.random() * 100);
@@ -27,6 +28,14 @@ public class City {
 		return name;
 	}
 	
+	public int getWarriors() {
+		return warriors;
+	}
+	
+	public void setWarriors(int warriors) {
+		this.warriors += warriors;
+	}
+	
 	// This method show you all information about your city
 	public void getInfo() {
 		System.out.println("Age " + getAge() + " Gold " + getGold() + " Population " + getPopulation() + " Popularity " + getPopularity() + " Free workers " + getFreePopulation());
@@ -37,6 +46,7 @@ public class City {
 	public void setPopulationPerTurn(int populationPerTurn) {
 		this.populationPerTurn = populationPerTurn;
 	}
+	
 	
 	public void setGuard(ArrayList<Warrior> guard) {
 		this.guard = guard;
@@ -108,7 +118,7 @@ public class City {
 		return freePopulation;
 	}
 	public void setFreePopulation() {
-		this.freePopulation = getPopulation() - getAllWorkers();
+		this.freePopulation = getPopulation() - getAllWorkers() - getWarriors();
 	}
 	
 	public void buyBuilding(Building building) {
@@ -117,13 +127,13 @@ public class City {
 	
 	//When you are set a building, first the app compare how many building you've already built. Then
 	public void Build(City city, Building building) {
-		if (building.getCurrentNumb() < building.getLimit() && city.getGold() > building.getPrice()) {
+		if (building.getCurrentNumb() < building.getLimit() && city.getGold() > building.getPrice() && city.getFreePopulation() > building.getWorkers()) {
 		yourBuildings.add(building);
 		city.buyBuilding(building);
 		int allWorkers = city.getPopulation();
 		allWorkers =-building.getWorkers();
 		} else {
-			System.out.println("You have built maximum of this buildings or you don't have enought gold");
+			System.out.println("We can't build it. Main reasons: you don't have gold, you have the limit, you don't have free workers");
 		}
 	}
 	
@@ -178,6 +188,7 @@ public class City {
 	
 	
 // Here are all the buildings you can build. And here you can add new ones. 
+// String name, int price, int buildTime, int addWood, int addGold, int addStone, int addIron, int addPopularity, int limit, int workers
 	public void setBuildList() {
 		 Building villageHall = new Building("Village Hall", 0, 0, 0, 50, 0, 0, 1, 1, 1);
 		 Building villageTemple = new Building("VillageTemple", 100, 0, 0, 0, 0, 0, 3, 1, 1);

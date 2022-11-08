@@ -7,8 +7,8 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Hello, player! How would you like to name your city?");
 		City myCity = new City();
-		myCity.setBuildList();
-		
+		myCity.setBuildList(); // these method should be united in one common method like "Building game"
+		myCity.setEvents(); // these method should be united in one common method
 		Scanner sc = new Scanner(System.in);
 		myCity.setName(sc.next());
 		myCity.setFreePopulation();
@@ -16,6 +16,7 @@ public class Main {
 		myCity.Build(myCity, myCity.getBuilding(0));
 		while(myCity.getGold() > 0 && myCity.getPopulation() > 0 && myCity.getPopularity() > 0) {
 			myCity.nextTurn();
+			myCity.getEvent();
 			System.out.println("What would you like to do?");
 			System.out.println("1.Build something. 2. Watch information about your city. 3.Set your militia.");
 			int action = sc.nextInt();

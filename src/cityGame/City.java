@@ -12,6 +12,7 @@ public class City {
 	private int popularity = 50; 
 	private List <Building> yourBuildings = new LinkedList<>();
 	private List <Building> buildList = new LinkedList<>();
+	private List <Event> events = new ArrayList<>(); // When it is done, change to Event []. 
 	private int populationPerTurn = (int) (population * 0.05);
 	private List <Warrior> guard = new LinkedList<>();
 	private int warriors = 0;
@@ -29,32 +30,37 @@ public class City {
 		return name;
 	}
 	
+	// This method helps you to set number of your militia (it will be changed one day)
+		public void setWarriors(int warriors) {
+			this.warriors += warriors;
+		}
+		
+	// This method helps to calculate your free people (- all workers and all militia troops)
 	public int getWarriors() {
 		return warriors;
 	}
 	
-	public void setWarriors(int warriors) {
-		this.warriors += warriors;
-	}
-	
-	// This method show you all information about your city
+	// This method show you all information about your city and set some base parameters 
 	public void getInfo() {
 		System.out.println("Age " + getAge() + " Gold " + getGold() + " Population " + getPopulation() + " Popularity " + getPopularity() + " Free workers " + getFreePopulation());
 	}
+	
 	public int getPopulationPerTurn() {
 		return populationPerTurn;
 	}
+	
 	public void setPopulationPerTurn(int populationPerTurn) {
 		this.populationPerTurn = populationPerTurn;
 	}
 	
-	
 	public void setGuard(ArrayList<Warrior> guard) {
 		this.guard = guard;
 	}
+	
 	public int getWood() {
 		return wood;
 	}
+	
 	public void setWood(int wood) {
 		this.wood = wood;
 	}
@@ -62,6 +68,7 @@ public class City {
 	public int getStone() {
 		return stone;
 	}
+	
 	public void setStone(int stone) {
 		this.stone = stone;
 	}
@@ -69,6 +76,7 @@ public class City {
 	public int getIron() {
 		return iron;
 	}
+	
 	public void setIron(int iron) {
 		this.iron = iron;
 	}
@@ -76,28 +84,37 @@ public class City {
 	public int getAge() {
 		return age;
 	}
+	
 	public void setName(String name) { 
 		this.name = name;
 	}
+	
 	public int getPopulation() {
 		return population;
 	}
+	
 	public void setPopulation(int population) {
 		this.population += population;
 	}
+	
 	public int getGold() {
 		return gold;
 	}
+	
 	public void setGold(int gold) {
 		this.gold += gold;
 	}
+	
 	public int getPopularity() {
 		return popularity;
 	}
+	
 	public void setPopularity(int popularity) {
 		this.popularity += popularity;
 	}
 	
+	
+	// This method is the base, it change year and calculate your resources for the next turn
 	public void nextTurn() {
 		System.out.println("This is " + age + " year(s) since our city has been created");
 		/*
@@ -115,13 +132,17 @@ public class City {
 		setFreePopulation();
 	}
 	
+	// This method return you all free workers
 	public int getFreePopulation() {
 		return freePopulation;
 	}
+	
+	// Every turn this method calculate free workers (not busy and not militia)
 	public void setFreePopulation() {
 		this.freePopulation = getPopulation() - getAllWorkers() - getWarriors();
 	}
 	
+	// When you build something, city pays it from its treasury
 	public void buyBuilding(Building building) {
 		this.gold -= building.getPrice();
 	}
@@ -138,8 +159,7 @@ public class City {
 		}
 	}
 	
-	
-	// These methods collect all Add resources for add nextTurn(); 
+	// These methods below collect all resources for add it nextTurn(); 
 	public int collectAllGold() {
 		int allGold = 0;
 		for (Building building: yourBuildings) {
@@ -179,6 +199,7 @@ public class City {
 		return allStone;
 	}
 	
+	// This method helps to calculate free workers (calculating all workers already busy)
 	public int getAllWorkers() {
 		int allWorkers = 0;
 		for (Building building: yourBuildings) {
@@ -219,16 +240,36 @@ public class City {
 			numb ++;
 		}
 	}
-	
-	
-	// Here are all the events 
-	Event Testevent = new Event() {
+									
+	// Here are all the events via anonymous class (interface event)
+	Event testEvent = new Event() {
 		@Override
 		public void takePlace() {
 			System.out.println("Hello from event1");
 		}
 	};
-}	
+	
+	Event testEvent2 = new Event() {
+		@Override
+		public void takePlace() {
+		System.out.println("Hello from event2");	
+		}
+	};
+	
+	// We add all the events via this method in the beginning of the game. We need at least 10 different events
+	public void setEvents() {
+		events.add(testEvent);
+		events.add(testEvent2);
+		}
+	
+	// Random event from events ArrayList comes and show its effect 
+	public void getEvent() {
+		int event = (int)(Math.random() * 2);
+		events.get(event).takePlace();
+	}
+	
+	
+} // Class end	
 
 
 	

@@ -268,14 +268,21 @@ public class City {
 	Event testEvent = new Event() {
 		@Override
 		public void takePlace() {
-			System.out.println("Hello from event1");
+			System.out.println("There are outlaws, Sir");
 		}
 	};
 	
 	Event testEvent2 = new Event() {
 		@Override
 		public void takePlace() {
-		System.out.println("Hello from event2");	
+		System.out.println("There are rats, Sir");	
+		}
+	};
+	
+	Event testEvent3 = new Event() {
+		@Override
+		public void takePlace() {
+		System.out.println("All is well");
 		}
 	};
 	
@@ -283,11 +290,12 @@ public class City {
 	public void setEvents() {
 		events.add(testEvent);
 		events.add(testEvent2);
+		events.add(testEvent3);
 		}
 	
 	// Random event from events ArrayList comes and show its effect 
 	public void getEvent() {
-		int event = (int)(Math.random() * 2);
+		int event = (int)(Math.random() * 3);
 		events.get(event).takePlace();
 	}
 	

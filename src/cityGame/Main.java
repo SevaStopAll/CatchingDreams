@@ -5,15 +5,20 @@ import java.util.Scanner;
 public class Main {
 	
 	public static void main(String[] args) {
+		play();
+	}
+	
+	public static void play() {
 		System.out.println("Hello, player! How would you like to name your city?");
 		City myCity = new City();
-		myCity.setBuildList(); // these method should be united in one common method like "Building game"
-		myCity.setEvents(); // these method should be united in one common method
+		myCity.setBuildList(); 
+		myCity.setEvents(); 
 		Scanner sc = new Scanner(System.in);
 		myCity.setName(sc.next());
 		myCity.setFreePopulation();
 		System.out.println("Your city name is " + myCity.getName());
 		myCity.Build(myCity, myCity.getBuilding(0));
+		myCity.Build(myCity, myCity.getBuilding(6));
 		while(myCity.getGold() > 0 && myCity.getPopulation() > 0 && myCity.getPopularity() > 0) {
 			myCity.nextTurn();
 			myCity.getEvent();

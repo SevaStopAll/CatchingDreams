@@ -7,7 +7,7 @@ import java.util.List;
 public class City {
 	// Base parameters: 
 	private String name;
-	private int population = (int)(1 + Math.random() * 100); 
+	private int population = (int)(50 + Math.random() * 100); 
 	private int freePopulation;
 	private int popularity = 50; 
 	private List <Building> yourBuildings = new LinkedList<>();
@@ -26,6 +26,14 @@ public class City {
 	public int food = (int)(1 + Math.random() * 100); // You need food for your population grows and lives
 	
 	
+	public int getFood() {
+		return food;
+	}
+
+	public void setFood() {
+		this.food -= population + collectAllFood();
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -129,6 +137,7 @@ public class City {
 		this.iron += collectAllIron();
 		this.stone += collectAllStone();
 		this.popularity += getAllPopularity();	
+		setFood();
 		setFreePopulation();
 	}
 	
@@ -191,12 +200,21 @@ public class City {
 		}
 		return allPopularity;
 	}
+	
 	public int collectAllStone() {
 		int allStone = 0;
 		for (Building building: yourBuildings) {
 			allStone += building.getAddStone(); 
 		}
 		return allStone;
+	}
+	
+	public int collectAllFood() {
+		int allFood = 0;
+		for (Building building: yourBuildings) {
+			allFood += building.getAddFood(); 
+		}
+		return allFood;
 	}
 	
 	// This method helps to calculate free workers (calculating all workers already busy)
@@ -209,21 +227,25 @@ public class City {
 	}
 	
 	
+	
+	
 // Here are all the buildings you can build. And here you can add new ones. 
-// String name, int price, int buildTime, int addWood, int addGold, int addStone, int addIron, int addPopularity, int limit, int workers
+// String name, int price, int buildTime, int addWood, int addGold, int addStone, int addIron, int addPopularity, int limit, int workers, int food
 	public void setBuildList() {
-		 Building villageHall = new Building("Village Hall", 0, 0, 0, 50, 0, 0, 1, 1, 1);
-		 Building villageTemple = new Building("VillageTemple", 100, 0, 0, 0, 0, 0, 3, 1, 1);
-		 Building inn = new Building("Inn", 50, 0, 0, 35, 0, 0, 3, 2, 1);
-		 Building mine = new Building("Mine", 50, 0, 0, 0, 0, 5, 0, 1, 5);
-		 Building sawmill = new Building("Sawmill", 50, 0, 5, 0, 0, 0, 0, 1, 5);
-		 Building quarry = new Building("Quarry", 100, 0, 0, 0, 5, 0, 0, 1, 5);
+		 Building villageHall = new Building("Village Hall", 0, 0, 0, 50, 0, 0, 1, 1, 1, 0);
+		 Building villageTemple = new Building("VillageTemple", 100, 0, 0, 0, 0, 0, 3, 1, 1, 0);
+		 Building inn = new Building("Inn", 50, 0, 0, 35, 0, 0, 3, 2, 1, 5);
+		 Building mine = new Building("Mine", 50, 0, 0, 0, 0, 5, 0, 1, 5, 0);
+		 Building sawmill = new Building("Sawmill", 50, 0, 5, 0, 0, 0, 0, 1, 5, 0);
+		 Building quarry = new Building("Quarry", 100, 0, 0, 0, 5, 0, 0, 1, 5, 0);
+		 Building field = new Building("Field", 50, 0, 0, 0, 0, 0, 0, 10, 10, 1000);
 		buildList.add(villageHall);
 		buildList.add(villageTemple);
 		buildList.add(inn);
 		buildList.add(mine);
 		buildList.add(sawmill);
 		buildList.add(quarry);
+		buildList.add(field);
 	}
 	
 	// this method create the building when you are creating it

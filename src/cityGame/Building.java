@@ -12,8 +12,10 @@ public class Building {
 	private int limit;
 	private int currentNumb = 0;
 	private int workers;
+	private int food;
 	
-	public Building(String name, int price, int buildTime, int addWood, int addGold, int addStone, int addIron, int addPopularity, int limit, int workers) {
+	// Every building is in City class. But building methods and parameters are here
+	public Building(String name, int price, int buildTime, int addWood, int addGold, int addStone, int addIron, int addPopularity, int limit, int workers, int food) {
 		this.name = name;
 		this.price = price;
 		this.buildTime = buildTime;
@@ -23,7 +25,9 @@ public class Building {
 		this.addIron = addIron;
 		this.limit = limit;
 		this.workers = workers;
+		this.food = food;
 	}
+	
 	
 	public String getName() {
 		return name;
@@ -33,6 +37,7 @@ public class Building {
 		return price;
 	}
 
+	// Building time is not realised yet
 	public int getBuildTime() {
 		return buildTime;
 	}
@@ -46,7 +51,6 @@ public class Building {
 		return addGold;
 	}
 
-
 	public int getAddStone() {
 		return addStone;
 	}
@@ -59,6 +63,11 @@ public class Building {
 		return addPopularity;
 	}
 	
+	public int getAddFood() {
+		return food;
+	}
+	
+	// These three methods are about building limits in your city. 
 	public void plusNumb() {
 		currentNumb++;
 	}
@@ -74,6 +83,7 @@ public class Building {
 	public int getWorkers() {
 		return workers;
 	}
+	
 
 }
 

@@ -29,7 +29,8 @@ public class City {
 	public int getFood() {
 		return food;
 	}
-
+	
+	// every next turn this method sets how much food does player have
 	public void setFood() {
 		this.food -= population + collectAllFood();
 	}

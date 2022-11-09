@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
-//Cashe with BigInteger
+/*Cashe with Map and BigInteger 
 
 public class Fibonacci {
 	
@@ -33,3 +33,4 @@ public class Fibonacci {
 		System.out.println(startTime - finishTime);
 	}
 }
+*/

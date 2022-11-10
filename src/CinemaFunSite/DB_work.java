@@ -28,7 +28,9 @@ public class DB_work {
 	{
 		statmt = conn.createStatement();
 		String yourReview = sc.nextLine();
-		statmt.execute(query);
+		statmt.execute(yourReview);
 		System.out.println("Done");
-	} 
+	}
+	
+	
 }

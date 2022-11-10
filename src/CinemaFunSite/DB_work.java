@@ -27,8 +27,9 @@ public class DB_work {
 	public static void WriteReview() throws SQLException
 	{
 		statmt = conn.createStatement();
+		String cinemaName = sc.nextLine();
 		String yourReview = sc.nextLine();
-		statmt.execute(yourReview);
+		statmt.execute("INSERT INTO 'reviews' (review) VALUES ('" + yourReview + "') WHERE cinema_name =  "+ cinemaName + ");");
 		System.out.println("Done");
 	}
 	

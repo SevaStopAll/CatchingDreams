@@ -17,8 +17,6 @@ public class DB_work {
 	   {
 		   conn = null;
 		   Class.forName("org.sqlite.JDBC");
-		   System.out.println("Please, enter the name of new or existing DB!");
-		   String baseName = sc.nextLine();
 		   conn = DriverManager.getConnection("jdbc:sqlite:cinema.db");
 		   
 		   System.out.println("The base was connected or created!");
@@ -29,7 +27,8 @@ public class DB_work {
 		statmt = conn.createStatement();
 		String cinemaName = sc.nextLine();
 		String yourReview = sc.nextLine();
-		statmt.execute("INSERT INTO 'reviews' (review) VALUES ('" + yourReview + "') WHERE cinema_name =  "+ cinemaName + ");");
+		int rating = sc.nextInt();
+		statmt.execute("INSERT INTO 'reviews' (cinema_name, review, rating) VALUES ('" + cinemaName + "','" + yourReview + "', " + rating + ");");
 		System.out.println("Done");
 	}
 	

@@ -32,5 +32,14 @@ public class DB_work {
 		System.out.println("Done");
 	}
 	
+	public static void WatchReview() throws SQLException {
+		statmt = conn.createStatement();
+		String cinemaName = sc.nextLine();
+		resSet = statmt.executeQuery("Select * from reviews WHERE cinema_name = " + cinemaName + ";");
+			while(resSet.next()) {
+				String review = resSet.getString("review");
+				System.out.println(review);
+			}
+	}
 	
 }

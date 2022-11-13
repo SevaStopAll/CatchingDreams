@@ -38,14 +38,14 @@ public class DB_work {
 		statmt = conn.createStatement();
 		System.out.println("Film's name");
 		String cinemaName = sc.nextLine();
-		resSet = statmt.executeQuery("Select * from reviews WHERE cinema_name = '" + cinemaName + "';");
+		resSet = statmt.executeQuery("Select * from reviews WHERE cinema_name = '" + cinemaName + "' ORDER BY rating DESC;");
 		int reviewNumber = 1;
 			while(resSet.next()) {
 				System.out.println(reviewNumber);
 				reviewNumber++;
 				String review = resSet.getString("review");
 				int rating = resSet.getInt("rating");
-				System.out.println(review + "User's rating: " + rating);
+				System.out.println(review + " User's rating: " + rating);
 			}
 	}
 	

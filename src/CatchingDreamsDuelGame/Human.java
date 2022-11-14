@@ -1,12 +1,12 @@
 package CatchingDreamsDuelGame;
 
 public abstract class Human {
-	int HP;
-	String name;
-	String position;
+	private String name;
+	private String position = "In the middle";
+	private String shootDirection;
+	private boolean isAlive = true;
 	
-	public Human(int HP, String name) {
-		this.HP = HP;
+	public Human(String name) {
 		this.name = name;
 		position = "In the middle";
 	}
@@ -15,16 +15,33 @@ public abstract class Human {
 		return name;
 	}
 	
-	public int getHP() {
-		return HP;
-	}
-	
 	public void setPosition(String position) {
 		this.position = position;
 	}
 	
 	public String getPosition() {
 		return position;
+	}
+	
+	public String getShootDirection() {
+		return shootDirection;
+	}
+
+	public void setShootDirection(String shootDirection) {
+		this.shootDirection = shootDirection;
+	}
+
+	public boolean isAlive() {
+		return isAlive;
+	}
+
+	public void setAlive(boolean isAlive) {
+		this.isAlive = isAlive;
+	}
+	
+	
+	public void getInfo() {
+		System.out.println("ShootDirection: " + shootDirection + " Position: " + position);
 	}
 			
 }

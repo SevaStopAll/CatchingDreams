@@ -1,21 +1,63 @@
 package CatchingDreamsDuelGame;
+import java.util.Scanner;
 
 public class Cowboy extends Human{
-	String shootDirection;
 
-	public Cowboy(int HP, String name) {
-		super(HP, name);
-		String position = "In the middle";
+	
+	public Cowboy(String name) {
+		super(name);
 	}
 	
-	public String Shoot() {
-		return shootDirection = "In the middle"; 
+	Scanner sc = new Scanner(System.in);
+	
+	public void shoot() {
+		int chooseDirection = sc.nextInt();
+		if (chooseDirection == 1) {
+			setShootDirection("Left");
+		} else if(chooseDirection == 2) {
+			setShootDirection("In the middle"); 
+		} else {
+			setShootDirection("Right");
+		}
 	}
 	
-	public void Duel(Cowboy cowboy, Cowboy cowboy2) {
-		while(cowboy.getHP() > 0 && cowboy2.getHP() > 0) {
-			if (cowboy.Shoot.equals(cowboy2.getPosition()) {
-				cowboy2.getHP();
+	public void move() {
+		int chooseDirection = sc.nextInt();
+		if (chooseDirection == 1) {
+			setPosition("Left");
+		} else if(chooseDirection == 2) {
+			setPosition("In the middle"); 
+		} else {
+			setPosition("Right");
+		}
+	}
+	 
+	public void Duel(Cowboy cowboy, NPC cowboy2) {
+		while(cowboy.isAlive() && cowboy2.isAlive()) {
+			cowboy.shoot();
+			cowboy2.move();
+			cowboy2.shoot();
+			cowboy.move();
+			if (cowboy.getShootDirection().equals(cowboy2.getPosition())) {
+			    cowboy2.setAlive(false);
+			    System.out.println("Your turn:");
+				cowboy.getInfo();
+				System.out.println("Your enemy's turn");
+				cowboy2.getInfo();
+			    System.out.println("Your enemy is dead.");
+			} else if (cowboy2.getShootDirection().equals(cowboy.getPosition())) {
+				cowboy.setAlive(false);
+				System.out.println("Your turn:");
+				cowboy.getInfo();
+				System.out.println("Your enemy's turn");
+				cowboy2.getInfo();
+				System.out.println("You are dead.");
+			} else {
+				System.out.println("Your turn:");
+				cowboy.getInfo();
+				System.out.println("Your enemy's turn");
+				cowboy2.getInfo();
+				Duel(cowboy, cowboy2);
 			}
 		}
 	}

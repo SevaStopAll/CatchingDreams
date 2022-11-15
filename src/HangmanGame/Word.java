@@ -42,6 +42,7 @@ public class Word {
 	public void errorsCheck() {
 		if (errors == 0) {
 			System.out.println("You lose");
+			System.out.println(toString());
 			System.exit(0);
 		}
 	}
@@ -79,11 +80,15 @@ public class Word {
 		char [] catEmpty = {'-','-','-'};
 		char [] school = {'s', 'c', 'h', 'o', 'o', 'l'}; 
 		char [] schoolEmpty = {'-', '-', '-', '-', '-', '-'};
+		char [] computer = {'c','o','m','p','u','t','e','r'};
+		char [] computerEmpty = {'-','-','-','-','u','t', 'e', 'r'};
 		words.add(english);
 		emptyWords.add(englishEmpty);
 		words.add(cat);
 		emptyWords.add(catEmpty);
 		words.add(school);
 		emptyWords.add(schoolEmpty);
+		words.add(computer);
+		words.add(computerEmpty);
 	}
 }

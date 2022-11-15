@@ -13,7 +13,6 @@ public class Word {
 	char [] empty;
 	private int errors = 5;
 	
-	
 	public Word() {
 		int rand = (int)(Math.random() * (words.size()));
 		this.letters = words.get(rand);
@@ -27,17 +26,21 @@ public class Word {
 	}
 	
 	public void guess(String string) {
+		boolean right = false;
 		for (int i = 0; i < letters.length; i++) {
 			if (string.charAt(0) == letters[i]) {
 				empty[i] = string.charAt(0);
-			} else {
-				errors--;
-			}
+				right = true;
+			}  
+		}
+		if (!right) {
+			errors--;
+			System.out.println("You have " + errors);
 		}
 	}
 	
-	public void errorsCheck(Word word) {
-		if (word.errors == 0) {
+	public void errorsCheck() {
+		if (errors == 0) {
 			System.out.println("You lose");
 			System.exit(0);
 		}
@@ -63,7 +66,7 @@ public class Word {
 		while(!word.isGuessed) {
 			word.guess(sc.nextLine());
 			System.out.println(empty); 
-			word.errorsCheck(word);
+			word.errorsCheck();
 			word.check();
 		}
 		sc.close();

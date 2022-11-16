@@ -60,9 +60,9 @@ public static void WatchPassangers() throws SQLException {
 		String nameSurname = resSet.getString("Name_Surname");
 		boolean baggage = resSet.getBoolean("baggage");
 		if (baggage == true) {
-			System.out.printf("Flight  %-5s | Name  %-20s + | Baggage YES\n", flNumber, nameSurname);
+			System.out.printf("Flight  %-5s | Name  %-20s | Baggage YES\n", flNumber, nameSurname);
 		} else {
-			System.out.printf("Flight  %-5s | Name  %-20s + | Baggage NO\n", flNumber, nameSurname);
+			System.out.printf("Flight  %-5s | Name  %-20s | Baggage NO\n", flNumber, nameSurname);
 		}
 	
 	}

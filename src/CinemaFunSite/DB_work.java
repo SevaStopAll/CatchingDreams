@@ -17,7 +17,7 @@ public class DB_work {
 	   {
 		   conn = null;
 		   Class.forName("org.sqlite.JDBC");
-		   conn = DriverManager.getConnection("jdbc:sqlite:cinema.db");
+		   conn = DriverManager.getConnection("jdbc:sqlite:Cinema.db");
 		   
 		   System.out.println("The base was connected or created!");
 	   }

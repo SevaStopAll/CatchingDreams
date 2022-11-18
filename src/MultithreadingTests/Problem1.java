@@ -11,14 +11,15 @@ public class Problem1 {
 		long start = System.currentTimeMillis();
 		Problem1 problem = new Problem1();
 		problem.initialize();
+		// problem.findMin();
+		// problem.findMax();
 		
 		
 		Thread thread1 = new Thread(new Runnable() {
 
 			@Override
 			public void run() {
-				problem.findMax();
-				
+				problem.findMax();		
 			}
 		});
 	

@@ -8,7 +8,7 @@ public class main {
 		DBWork.Connect();
 		System.out.println("Welcome to our store. Here are categories of goods");
 		DBWork.ShowMenu();
-		DBWork.ShowSKUs();
+		DBWork.addToShopList();
 
 	}
 

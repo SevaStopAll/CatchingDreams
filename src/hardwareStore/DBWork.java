@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class DBWork {
@@ -12,6 +14,8 @@ public class DBWork {
 	public static Statement statmt;
 	public static ResultSet resSet;
 	public static Scanner sc = new Scanner(System.in);
+	static List<String> shopList = new ArrayList<>();
+	static int TotalPrice = 0;
 	
 
 public static void Connect() throws ClassNotFoundException, SQLException {
@@ -31,7 +35,7 @@ public static void ShowMenu() throws SQLException {
 
 public static void ShowSKUs() throws SQLException {
 	statmt = conn.createStatement();
-	String Category = "GPU";
+	String Category = sc.next();
 	resSet = statmt.executeQuery("Select * from SKUs WHERE SKU_Category = '" + Category + "';"); /// Here we have to print SKU from a CATEGORY
 	while(resSet.next()) {
 		String SKU = resSet.getString("SKU_Name");
@@ -43,6 +47,20 @@ public static void ShowSKUs() throws SQLException {
 	}
 }
 
+
+
+public static void addToShopList() throws SQLException {
+	statmt = conn.createStatement();
+	String Category = sc.nextLine();
+	String SKU_Name = sc.nextLine();
+	shopList.add(SKU_Name);
+	resSet = statmt.executeQuery("Select * from SKUs WHERE SKU_Category = '" + Category + "' AND SKU_Name = '" + SKU_Name + "';");	
+	while(resSet.next()) {
+		double price = resSet.getDouble("SKU_price");
+		TotalPrice += price;
+		System.out.println(TotalPrice);
+	}
+	}
 }
 
 

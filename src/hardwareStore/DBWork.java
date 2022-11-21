@@ -16,6 +16,7 @@ public class DBWork {
 	public static Scanner sc = new Scanner(System.in);
 	static List<String> shopList = new ArrayList<>();
 	static int TotalPrice = 0;
+	static int orderNumber = 1;
 	
 
 public static void Connect() throws ClassNotFoundException, SQLException {
@@ -23,6 +24,11 @@ public static void Connect() throws ClassNotFoundException, SQLException {
 	conn = null;
 	Class.forName("org.sqlite.JDBC");
 	conn = DriverManager.getConnection("jdbc:sqlite:HardwareStoreDB.db");
+	statmt = conn.createStatement();
+	resSet = statmt.executeQuery("Select ORDER_NUMBER from ORDERS;");
+	while (resSet.next()) {
+		orderNumber = resSet.getInt("ORDER_NUMBER") + 1;
+	}
 }
 finally {}
 } 
@@ -74,6 +80,21 @@ public static void addToShopList() throws SQLException {
 	}
 	} finally {}
 	}
+
+public static void createOrder() throws SQLException {
+	for (String shop: shopList) {
+		try {
+			statmt = conn.createStatement();
+			resSet = statmt.executeQuery("Select * from SKUs WHERE SKU_Name = '" + shop + "';");	
+			while(resSet.next()) {
+				int SKU_id = resSet.getInt("SKU_ID");
+				statmt.execute("INSERT INTO ORDERS (ORDER_NUMBER, SKU_ID) VALUES ('" + orderNumber +"', '" + SKU_id + "');");
+			}
+		} finally {
+			orderNumber++;
+		} 
+	}
+}
 
 
 public static void addtoDB() throws SQLException {

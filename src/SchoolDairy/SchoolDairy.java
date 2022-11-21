@@ -43,6 +43,11 @@ public class SchoolDairy {
 		} finally {}
 	}
 	
+	public void showHomework() {
+		System.out.println(dairy.entrySet());
+		
+	}
+	
 	
 
 

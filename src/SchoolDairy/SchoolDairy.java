@@ -3,16 +3,21 @@ package SchoolDairy;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.sql.*;
 
 public class SchoolDairy {
-	String [] [] schedule;
+	String [] [] schedule = new String [5][8];
 	Map <Integer, String> dairy = new HashMap<>();
+	String student;
 	
 	public SchoolDairy() {
-		String [] [] schedule = new String [5] [8];
 		createSchedule();
+		try {
+			Scanner sc = new Scanner(System.in);
+		student = sc.nextLine();
+		}
+		finally {}
 	};
-	
 	
 	public void createSchedule() {
 		for (int i = 0; i < schedule.length; i++) {

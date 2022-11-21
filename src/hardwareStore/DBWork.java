@@ -19,21 +19,30 @@ public class DBWork {
 	
 
 public static void Connect() throws ClassNotFoundException, SQLException {
+	try {
 	conn = null;
 	Class.forName("org.sqlite.JDBC");
 	conn = DriverManager.getConnection("jdbc:sqlite:HardwareStoreDB.db");
 }
+finally {}
+} 
 
 public static void ShowMenu() throws SQLException {
+	try {
 	statmt = conn.createStatement();
 	resSet = statmt.executeQuery("Select SKU_Category from SKUs;"); /// Here we have to print only CATEGORIES
 	while(resSet.next()) {
 		String category = resSet.getString("SKU_Category");
 		System.out.println(category);
 	}
+	}
+	finally {
+		
+	}
 }
 
 public static void ShowSKUs() throws SQLException {
+	try {
 	statmt = conn.createStatement();
 	String Category = sc.next();
 	resSet = statmt.executeQuery("Select * from SKUs WHERE SKU_Category = '" + Category + "';"); /// Here we have to print SKU from a CATEGORY
@@ -45,11 +54,14 @@ public static void ShowSKUs() throws SQLException {
 		System.out.println(price);
 		System.out.println(storage);
 	}
+	}
+	finally {}
 }
 
 
 
 public static void addToShopList() throws SQLException {
+	try {
 	statmt = conn.createStatement();
 	String Category = sc.nextLine();
 	String SKU_Name = sc.nextLine();
@@ -60,8 +72,23 @@ public static void addToShopList() throws SQLException {
 		TotalPrice += price;
 		System.out.println(TotalPrice);
 	}
+	} finally {}
 	}
+
+
+public static void addtoDB() throws SQLException {
+	try {
+		statmt = conn.createStatement();
+		String Category = sc.nextLine();
+		String SKU_producer = sc.nextLine();
+		String SKU_Name = sc.nextLine();
+		String SKU_Description = sc.nextLine();
+		double SKU_Price = sc.nextDouble();
+		int SKU_Storage = sc.nextInt();
+		statmt.execute("INSERT INTO SKUs (SKU_Category, SKU_Producer, SKU_Name, SKU_Description, SKU_price, SKU_Storage) VALUES ('" + Category +
+				"', '" + SKU_producer + "', '" + SKU_Name + "', '" + SKU_Description + "', '" + SKU_Price + "', '" + SKU_Storage + "');");
+	} finally {} 
 }
 
+} //end of the Class
 
-// end of the Class

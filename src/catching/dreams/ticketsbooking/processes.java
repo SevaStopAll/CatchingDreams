@@ -11,12 +11,15 @@ public class processes {
 	public static Scanner sc = new Scanner(System.in);
 
 public static void Conn() throws ClassNotFoundException, SQLException {
+	try {
 	conn = null;
 	Class.forName("org.sqlite.JDBC");
 	conn = DriverManager.getConnection("jdbc:sqlite:Booking.db");
-}
+}finally {}
+} 
 
 public static void WatchFlightTable() throws SQLException {
+	try {
 	statmt = conn.createStatement();
 	resSet = statmt.executeQuery("Select * from Flights");
 		while(resSet.next()) {
@@ -26,13 +29,15 @@ public static void WatchFlightTable() throws SQLException {
 			// Add date 
 			System.out.printf("Number %-5s" + " | " + "Destination: %-20s" + " | " + "Free Seats: %-3d\n" , flNumber, destination, freeSeats );
 		}	
-		conn.close();
-		statmt.close();
-		resSet.close();
-		sc.close();
+	} finally {
+		/*
+		 * conn.close(); statmt.close(); resSet.close(); sc.close();
+		 */
+	}
 }
 
 public static void BuyTicket() throws SQLException {
+	try {
 	statmt = conn.createStatement();
 	System.out.println("Please choose the flight!");
 	int flight = sc.nextInt();
@@ -46,13 +51,17 @@ public static void BuyTicket() throws SQLException {
 	int seatsBefore = resSet.getInt("free_seats");
 	int seatsAfter = seatsBefore - 1;
 	statmt.executeUpdate("UPDATE Flights SET free_seats = " + seatsAfter + " WHERE flight_number = '" + flight + "';");	
+	
+	} finally {
 	conn.close();
 	statmt.close();
 	resSet.close();
 	sc.close();
+	}
 }
 
 public static void WatchPassangers() throws SQLException {
+	try {
 	statmt = conn.createStatement();
 	resSet = statmt.executeQuery("Select * from Flight_passangers ORDER BY Flight, Name_Surname");
 	while(resSet.next()) {
@@ -66,9 +75,11 @@ public static void WatchPassangers() throws SQLException {
 		}
 	
 	}
+	} finally {
 	conn.close();
 	statmt.close();
 	resSet.close();
 	sc.close();
+	}
 }
 }

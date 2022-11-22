@@ -12,8 +12,7 @@ public class SchoolDairy {
 	
 	public SchoolDairy() {
 		createSchedule();
-		try {
-			Scanner sc = new Scanner(System.in);
+		try (Scanner sc = new Scanner(System.in)) {
 		student = sc.nextLine();
 		}
 		finally {}
@@ -22,8 +21,7 @@ public class SchoolDairy {
 	public void createSchedule() {
 		for (int i = 0; i < schedule.length; i++) {
 			for (int j = 0; j < schedule[i].length; j++) {
-				try {
-					Scanner sc = new Scanner(System.in);
+				try (Scanner sc = new Scanner(System.in);){
 					schedule[i][j] = sc.nextLine();
 				}
 				finally {
@@ -34,8 +32,7 @@ public class SchoolDairy {
 	}
 	
 	public void createHomework() {
-		try {
-			Scanner sc = new Scanner(System.in);
+		try (Scanner sc = new Scanner(System.in)) {
 			int dayLesson = sc.nextInt();
 			sc.nextLine();
 			String homework = sc.nextLine(); 
@@ -47,12 +44,6 @@ public class SchoolDairy {
 		System.out.println(dairy.entrySet());
 		
 	}
-	
-	
-
-
-
-
 } // class end
 
 

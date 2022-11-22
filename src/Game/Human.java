@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+@Author(name = "I am", DateOfCreation = 2019)
 public abstract class Human {
 	protected String name;
 	protected int Strenght = (int)(1 + Math.random() * 10);

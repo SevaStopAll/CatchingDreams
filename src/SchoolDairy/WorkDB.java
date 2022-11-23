@@ -16,14 +16,10 @@ public class WorkDB {
 	public static ResultSet resSet;
 	public static Set <String> setUsers = new HashSet<>();
 
-	public static void connect() {
-		try (Scanner sc = new Scanner(System.in)){
+	public static void connect() throws ClassNotFoundException, SQLException {
 			conn = null;
 		    Class.forName("org.sqlite.JDBC");
-		    conn = DriverManager.getConnection("jdbc:sqlite: SchoolDairies.db");
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		} finally {}
+		    conn = DriverManager.getConnection("jdbc:sqlite:SchoolDairies.db");
 	}
 	
 	public static Set <String> CreateUserList() throws ClassNotFoundException, SQLException {
@@ -37,16 +33,16 @@ public class WorkDB {
 	}
 	
 	public static void AddUser() throws SQLException {
-		try (Scanner sc = new Scanner (System.in)) {
+		Scanner sc = new Scanner (System.in); 
+			String logIn = sc.next();
 			statmt = conn.createStatement();
-		String logIn = sc.next();
 		if (setUsers.contains(logIn)) {
 			System.out.println("This login is already exist. Please, try another login");
 			WorkDB.AddUser();
-		} 
-		String password = sc.next();
-		statmt.execute("INSERT INTO 'users' (userName, userPassword) VALUES ('" + logIn + "' , '" + password + "' );");
-		} 
+		}
+		setUsers.add(logIn);
+		statmt.execute("INSERT INTO 'STUDENTS' (Student_Login) VALUES ('" + logIn + "');");
+		
 		System.out.println("User account created.");
 	}
 }

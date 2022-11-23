@@ -15,7 +15,6 @@ public class SchoolDairy {
 		try (Scanner sc = new Scanner(System.in)) {
 		student = sc.nextLine();
 		}
-		finally {}
 	};
 	
 	public void createSchedule() {
@@ -37,7 +36,7 @@ public class SchoolDairy {
 			sc.nextLine();
 			String homework = sc.nextLine(); 
 			dairy.put(dayLesson, homework);
-		} finally {}
+		}
 	}
 	
 	public void showHomework() {

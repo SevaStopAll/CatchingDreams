@@ -14,6 +14,16 @@ class MyMathTest {
 				MyMath.divide(1, 0);
 			}
 		}, "Can't divide by zero");
-
+	}
+	
+	@Test
+	public void zeroDenominatorShouldThrowException1() {
+		ArithmeticException thrown = Assertions.assertThrows(ArithmeticException.class, () -> { MyMath.divide(1, 0);}, "Can't divide by zero");
+	}
+	
+	// Change to newType Lambda 
+	@Test
+	public void zeroDenominatorShouldThrowException11() {
+		ArithmeticException thrown = Assertions.assertThrows(ArithmeticException.class, () -> { MyMath.divide(1, 0);}, "Can't divide by zero");
 	}
 }

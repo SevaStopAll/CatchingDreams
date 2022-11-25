@@ -1,4 +1,3 @@
-package ChatLight;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,13 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-
-
 
 public class LogPass {
 	public static Connection conn;
@@ -51,38 +47,38 @@ public static HashMap<String, String> CreateUserList() throws ClassNotFoundExcep
 		String password = sc.next();
 		statmt.execute("INSERT INTO 'users' (User_Login, User_Password) VALUES ('" + userLogin + "' , '" + password + "' );");
 		System.out.println("Registration success.");
+		menu();
 	}
 	
 	public static void LogIn() {
-	System.out.println("Please add your name and password!");
-	userLogin = sc.next();
-	String password = sc.next();
-	sc.nextLine();
-	try {
-		if (password.equals(LogPass.CreateUserList().get(userLogin))) {
-			System.out.println("Success");
-			userMenu();
+		System.out.println("Please add your name and password!");
+		userLogin = sc.next();
+		String password = sc.next();
+		sc.nextLine();
+		try {
+			if (password.equals(LogPass.CreateUserList().get(userLogin))) {
+				System.out.println("Success");
+				userMenu();
+			} else {
+				System.out.println("Not correct");
+				LogIn();
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else {
-		System.out.println("Not correct");
-		LogIn();
-		}
-	} catch (ClassNotFoundException | SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
 	}
 	
 	public static void sendMessage() throws SQLException {
 		System.out.println("Enter the Recipient");
 		String recipient = sc.nextLine();
 		if (setUsers.contains(recipient)) {
-		System.out.println("Now enter you message");
-		String message = sc.nextLine();
-		statmt = conn.createStatement();
-		String time = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss").format(Calendar.getInstance().getTime());
-		statmt.execute("INSERT INTO 'Messages' (Sender, Recipient, Message, Date, Written) VALUES('" + userLogin + "', '" + recipient + "', '" + message + "', '" 
-		+ time + "',  + 0);");
+			System.out.println("Now enter you message");
+			String message = sc.nextLine();
+			statmt = conn.createStatement();
+			String time = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss").format(Calendar.getInstance().getTime());
+			statmt.execute("INSERT INTO 'Messages' (Sender, Recipient, Message, Date, Written) VALUES('" + userLogin + "', '" + recipient + "', '" + message + "', '" 
+			+ time + "',  + 0);");
 		} else {
 			System.out.println("Can't find this user registered");
 			sendMessage();
@@ -106,9 +102,6 @@ public static HashMap<String, String> CreateUserList() throws ClassNotFoundExcep
 			numbOfMessage++;
 			System.out.println();
 		}
-		conn.close();
-		statmt.close();
-		resSet.close();
 	}
 	
 	public static void menu() throws SQLException {
@@ -124,39 +117,39 @@ public static HashMap<String, String> CreateUserList() throws ClassNotFoundExcep
 			
 			e.printStackTrace();
 		}
-		System.out.println("1. Login or 2.Sign Up");
+		System.out.println("1. Login   2.Sign Up");
 		int operation = sc.nextInt();
 		switch(operation) {
-		case(1): 
-			LogPass.LogIn();
-			break;
-		case(2):
-			LogPass.AddUser();
-			break;
+			case(1): 
+				LogPass.LogIn();
+				break;
+			case(2):
+				LogPass.AddUser();
+				break;
 		}
 	}
 		
 	public static void userMenu() throws SQLException {	
-		System.out.println("What do you want to do? \n 1. Send a message \n 2. Inbox");	
+		System.out.println("What do you want to do? \n1.Send a message \n2.Inbox \n3.Exit ");	
 		try (Scanner sc = new Scanner(System.in))
 		{
 		int operation = sc.nextInt();
 		
 		switch(operation) {
-		case(1):
-			LogPass.sendMessage();
-			userMenu();
-			break;
-		
-		case(2):
-			LogPass.readMessages();
-			userMenu();
-			break;
+			case(1):
+				LogPass.sendMessage();
+				userMenu();
+				break;
 			
-		case(3):
-			System.exit(0);
-			userMenu();
-			break;
+			case(2):
+				LogPass.readMessages();
+				userMenu();
+				break;
+				
+			case(3):
+				System.exit(0);
+				userMenu();
+				break;
 		}
 		}
 		

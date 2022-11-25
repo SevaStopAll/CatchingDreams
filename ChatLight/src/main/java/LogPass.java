@@ -12,13 +12,8 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class LogPass {
-	public static Connection conn;
-	public static Statement statmt;
-	public static ResultSet resSet;
-	public static Scanner sc = new Scanner(System.in);
-	public static HashMap <String, String> usersList = new HashMap<>();
-	public static Set <String> setUsers = new HashSet<>();
-	public static String userLogin;
+
+
 	
 public static void Conn() throws ClassNotFoundException, SQLException {
 	conn = null;

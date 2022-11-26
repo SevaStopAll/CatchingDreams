@@ -1,6 +1,8 @@
+package logic;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,8 +13,15 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
-public class LogPass {
 
+public class LogPass {
+	static Connection conn;
+	static Statement statmt;
+	static ResultSet resSet;
+	static Set<String> setUsers = new HashSet<>();
+	static HashMap<String, String> usersList = new HashMap<>();
+	static Scanner sc = new Scanner(System.in);
+	static String userLogin;
 
 	
 public static void Conn() throws ClassNotFoundException, SQLException {
@@ -40,7 +49,10 @@ public static HashMap<String, String> CreateUserList() throws ClassNotFoundExcep
 			LogPass.AddUser();
 		} 
 		String password = sc.next();
-		statmt.execute("INSERT INTO 'users' (User_Login, User_Password) VALUES ('" + userLogin + "' , '" + password + "' );");
+		 String sql = "INSERT INTO 'users' (User_Login, User_Password) Values (?, ?)";
+         PreparedStatement preparedStatement = conn.prepareStatement(sql);
+         preparedStatement.setString(1, userLogin);
+         preparedStatement.setString(2, password);
 		System.out.println("Registration success.");
 		menu();
 	}

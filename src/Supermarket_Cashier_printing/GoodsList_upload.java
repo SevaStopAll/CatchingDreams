@@ -2,6 +2,7 @@ package Supermarket_Cashier_printing;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -71,10 +72,12 @@ public class GoodsList_upload {
 	}
 	
 	public static void UpdateGoodsList() throws SQLException {
-		statmt = conn.createStatement();
+		PreparedStatement prepStatmt = conn.prepareStatement("INSERT INTO 'Goodlist' (SKU_Name, price) VALUES (?, ?)");
 		String name = sc.nextLine();
 		int price = sc.nextInt();
-		statmt.execute("INSERT INTO 'Goodlist' (SKU_name, price) VALUES ('" + name + "', '" + price +"' );");
+		prepStatmt.setString(1, name);
+		prepStatmt.setInt(2, price);
+		prepStatmt.executeUpdate();
 		System.out.println("New SKU was added.");
 	}	
 }

@@ -2,6 +2,7 @@ package toDoList;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,9 +22,10 @@ public class Conn_tDL {
 	}
 	
 	public static void WriteDB() throws SQLException {
-		statmt = conn.createStatement();
+		PreparedStatement prepStat= conn.prepareStatement("INSERT into 'ToDoList' ('name', 'IsDone') VALUES (?, 0);");
 		String query = sc.nextLine();
-		statmt.execute("INSERT into 'ToDoList' ('name', 'IsDone') VALUES ('" + query + "', 0);");
+		prepStat.setString(1, query);
+		prepStat.executeUpdate();
 		System.out.println("Done");
 	}
 	
